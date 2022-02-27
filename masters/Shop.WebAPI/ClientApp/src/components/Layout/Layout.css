@@ -35,6 +35,10 @@
   text-decoration: underline;
 }
 
+.ant-layout-content{
+  background-color: #ffffff;
+}
+
 footer {
   text-align: center;
 }

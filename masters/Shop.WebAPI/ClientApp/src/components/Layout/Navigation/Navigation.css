@@ -1,0 +1,38 @@
+.navigation {
+  padding: 0 6.25rem;
+  background-color: #fff3e0;
+}
+
+.navigation .ant-row {
+  height: 3rem;
+}
+
+.nav-item .ant-btn {
+  min-width: 8rem;
+  color: inherit;
+  background-color: #fff3e0;
+  height: 2.5rem;
+  border: 0;
+  padding-top: 0;
+  line-height: 20px;
+  
+  padding: 0 1rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #111111;
+}
+
+.nav-item .ant-btn:hover,
+.nav-item .ant-btn:focus {
+  background-color: #ffffff;
+  font-weight: 600;
+  color: #111111;
+}
+
+.nav-item .active-nav-item {
+  background-color: #ffffff;
+  font-weight: 600;
+  color: #111111;
+}
