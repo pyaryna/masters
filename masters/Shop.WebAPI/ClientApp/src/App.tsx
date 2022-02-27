@@ -1,10 +1,21 @@
-import React, { FC } from 'react';
-import { Button } from 'antd';
-import './App.css';
+import { FC } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import Layout from "./components/Layout/Layout";
+
+import "./App.css";
 
 const App: FC = () => (
   <div className="App">
-    <Button type="primary">Button</Button>
+    <BrowserRouter>
+      <Layout>
+        <Switch>
+          {/* <PrivateRoute exact path="/measures" component={Measures} /> */}
+
+          {/* <Route path="/" component={Home} /> */}
+        </Switch>
+      </Layout>
+    </BrowserRouter>
   </div>
 );
 

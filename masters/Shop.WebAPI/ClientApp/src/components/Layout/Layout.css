@@ -1,0 +1,40 @@
+.layout .header {
+  background: linear-gradient(to right, #ffcc66 0%, #ff5050 80%);
+  height: auto;
+  padding-top: 0.5rem;
+}
+
+.header .logo {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+  color: #ffffff;
+}
+
+.header .contacts-icon {
+  color: #ffffff;
+  margin-right: 0.5rem;
+}
+
+.header .contacts,
+.header .auth-control {
+  padding-bottom: 0.5rem;
+}
+
+.header .contacts,
+.header .contacts a,
+.header .auth-control a {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.header .contacts:hover a,
+.header .auth-control:hover a {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+}
