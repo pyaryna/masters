@@ -1,0 +1,40 @@
+.info {
+  width: 80%;
+  margin: auto;
+  padding: 3rem 0;
+}
+
+.info p {
+  text-indent: 2rem;
+  font-family: Montserrat;
+  text-align: justify;
+  font-size: 1.15rem;
+}
+
+.info ul li {
+  font-family: Montserrat;
+  padding: 0.3rem;
+  font-size: 1.15rem;
+}
+
+.centeredinfo {
+  font-family: Montserrat;
+  padding: 0.3rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.info .ant-image{
+  margin-left: 1rem;
+  float: right;
+}
+
+.info .imgs {
+  width: 25rem;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: auto;
+}
