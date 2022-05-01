@@ -1,17 +1,18 @@
-import flask
+from flask import Flask, render_template, request, jsonify
+from pymongo import MongoClient
+from bson.objectid import ObjectId
+from flask_cors import CORS
+
+from config import *
 from calculation_bll import *
-from flask import request, jsonify
 
-# calculate_similarity()
-# calculate_recomendations_for_user()
-# calculate_recomendations_by_book()
+app = Flask(__name__)
+client = MongoClient(connectionString)
+# db = client.lin_flask
+db = client['masters']
+CORS(app)
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-
-
-
-# connect_to_database(database)
+connect_to_database(db)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -19,18 +20,37 @@ def home():
 <p>A prototype API for distant reading of science fiction novels.</p>'''
 
 
-@app.route('/api/v1/calculate_similarity', methods=['GET'])
-def calculate_similarity():
-    return jsonify(calculate_similarity())
+@app.route('/api/v1/similarity', methods=['GET'])
+def calculate_book_similarity():
+    amount = calculate_similarity()
+    return jsonify({
+            'status': '200 OK',
+            'message':'Data is posted to MongoDB!',
+            'amount': amount
+        })
 
 
 @app.route('/api/v1/user', methods=['GET'])
 def recommendation_for_user():
-    return jsonify(calculate_recomendations_for_user(database))
+    recommedations = []
+    for item in calculate_recomendations_for_user():
+        recommedations.append({
+            'rate': item[0],
+            'bookId': str(item[1])
+        })
+    return jsonify(recommedations)
 
 
 @app.route('/api/v1/book', methods=['GET'])
 def recommendation_by_book():
-    return jsonify(calculate_recomendations_for_user())
+    recommedations = []
+    for item in calculate_recomendations_by_book():
+        recommedations.append({
+            'rate': item[0],
+            'bookId': str(item[1])
+        })
+    return jsonify(recommedations)
 
-app.run()
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
