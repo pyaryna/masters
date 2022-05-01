@@ -43,6 +43,7 @@ def calculate_similarity():
                 new_similaritites.append(similarity)
 
     insert_books_similarity(new_similaritites)
+    return len(new_similaritites)
        
 
 def calculate_recomendations_by_book(book_id = 1):
@@ -57,10 +58,10 @@ def calculate_recomendations_by_book(book_id = 1):
     similarities.sort()
     similarities.reverse()
     # return book_similarities
-    print(similarities)
+    return similarities
 
 
-def calculate_recomendations_for_user(database, user_id = 1):
+def calculate_recomendations_for_user(user_id = 1):
     # user_id = get_random_record('users')['_id']
     user_id = ObjectId('620bb9fef23b1bc78052c605')
 
@@ -78,4 +79,4 @@ def calculate_recomendations_for_user(database, user_id = 1):
         book_similatity.update({review['bookId'] : similarities})
 
     recommended_items = get_recommended_items(changed_user_reviews, book_similatity)
-    print(recommended_items)
+    return recommended_items
