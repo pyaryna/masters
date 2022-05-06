@@ -1,6 +1,5 @@
 from calculation_dal import *
 from calculation_utils import *
-from bson.objectid import ObjectId
 
 def calculate_similarity():
     new_rates = get_rates_for_previous_day()
@@ -46,9 +45,7 @@ def calculate_similarity():
     return len(new_similaritites)
        
 
-def calculate_recomendations_by_book(book_id = 1):
-    # book_id = get_random_record('books')['_id']
-    book_id = ObjectId('620ea6721feee707fc54939a')
+def calculate_recomendations_by_book(book_id):    
     book_similarities = get_similarity_by_book(book_id)
 
     similarities = []
@@ -57,14 +54,10 @@ def calculate_recomendations_by_book(book_id = 1):
             
     similarities.sort()
     similarities.reverse()
-    # return book_similarities
     return similarities
 
 
-def calculate_recomendations_for_user(user_id = 1):
-    # user_id = get_random_record('users')['_id']
-    user_id = ObjectId('620bb9fef23b1bc78052c605')
-
+def calculate_recomendations_for_user(user_id):
     user_reviews = get_rates_by_users([user_id])
     changed_user_reviews = {}
 
