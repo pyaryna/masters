@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shop.BLL;
+using Shop.DAL;
+using Shop.DAL.Configuration;
 
 namespace Shop.WebAPI
 {
@@ -20,6 +23,17 @@ namespace Shop.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("Default", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
+            services.Configure<DbSettings>(Configuration.GetSection("DatabaseSettings"));
+
+            services.AddDataModule(Configuration);
+            services.AddBusinessModule(Configuration);
 
             services.AddControllersWithViews();
 
@@ -47,6 +61,7 @@ namespace Shop.WebAPI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseRouting();
 
