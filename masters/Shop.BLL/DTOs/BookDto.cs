@@ -9,7 +9,7 @@ namespace Shop.BLL.DTOs
 {
     public class BookDto
     {
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         public string Title { get; set; }
 

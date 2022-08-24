@@ -1,6 +1,8 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout as AntLayout, Row, Col } from "antd";
+
+import { IUser } from "../../types/IUser";
 
 import { PhoneOutlined, MailOutlined, FacebookFilled } from "@ant-design/icons";
 
@@ -9,6 +11,16 @@ import "./Layout.css";
 const { Header } = AntLayout;
 
 const RageHeader: FC = memo(() => {
+  const [users, setUsers] = useState<IUser>();
+
+  const fetchUsers = useCallback(() => {
+
+  }, [setUsers])
+
+  useEffect(() => {
+    fetchUsers()
+  }, [fetchUsers])
+
   return (
     <AntLayout className="layout">
       <Header className="header">
@@ -32,13 +44,16 @@ const RageHeader: FC = memo(() => {
           <Col span={4}>
             <Row className="contacts">
               <MailOutlined className="contacts-icon" />
-              <Link to="mailto:p.yaryna@gmail.com">Write us</Link>
+              <a href="mailto:p.yaryna@gmail.com">Write us</a>
             </Row>
             <Row className="contacts">
               <FacebookFilled className="contacts-icon" />
-              <Link to="https://www.facebook.com/profile.php?id=100008201021812">
+              <a href="https://www.facebook.com/profile.php?id=100008201021812"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Facebook
-              </Link>
+              </a>
             </Row>
           </Col>
           <Col span={4}>
