@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Shop.DAL.Entities
 {
-    public class Publisher
+    public class Genre
     {
         public ObjectId Id { get; set; }
 

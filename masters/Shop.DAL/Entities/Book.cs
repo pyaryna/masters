@@ -13,9 +13,11 @@ namespace Shop.DAL.Entities
         [BsonElement("title")]
         public string Title { get; set; }
 
-        //public Author Author { get; set; }
+        [BsonElement("author")]
+        public Author Author { get; set; }
 
-        //public Publisher Publisher { get; set; }
+        [BsonElement("publisher")]
+        public Publisher Publisher { get; set; }
 
         [BsonElement("price")]
         public double Price { get; set; }
@@ -23,8 +25,8 @@ namespace Shop.DAL.Entities
         [BsonElement("description")]
         public string Description { get; set; }
 
-        [BsonElement("generes")]
-        public List<string> Generes { get; set; }
+        [BsonElement("genres")]
+        public List<Genre> Genres { get; set; }
 
         [BsonElement("language")]
         public string Language { get; set; }
@@ -34,8 +36,8 @@ namespace Shop.DAL.Entities
 
         public string ISBN { get; set; }
 
-        //[BsonElement("publishedDate")]
-        //public DateTime PublishedDate { get; set; }
+        [BsonElement("publishedDate")]
+        public DateTime PublishedDate { get; set; }
 
         [BsonElement("imageUrl")]
         public string ImageUrl { get; set; }

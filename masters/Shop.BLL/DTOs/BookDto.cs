@@ -13,15 +13,15 @@ namespace Shop.BLL.DTOs
 
         public string Title { get; set; }
 
-        //public Author Author { get; set; }
+        public AuthorDto Author { get; set; }
 
-        //public Publisher Publisher { get; set; }
+        public PublisherDto Publisher { get; set; }
 
         public double Price { get; set; }
 
         public string Description { get; set; }
 
-        public List<string> Generes { get; set; }
+        public List<GenreDto> Genres { get; set; }
 
         public string Language { get; set; }
 
