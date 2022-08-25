@@ -30,5 +30,12 @@ namespace Shop.BLL.Services
 
             return _mapper.Map<IEnumerable<Book>, IEnumerable<BookDto>>(books);
         }
+
+        public async Task<IEnumerable<BookPreviewDto>> GetAllBooksPreviews()
+        {
+            var books = await _unitOfWork.BookRepository.GetAllBooksPreviews();
+
+            return _mapper.Map<IEnumerable<Book>, IEnumerable<BookPreviewDto>>(books);
+        }
     }
 }

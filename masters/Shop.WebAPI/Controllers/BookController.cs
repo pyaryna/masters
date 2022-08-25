@@ -18,10 +18,18 @@ namespace Shop.WebAPI.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet("books")]
-        public async Task<IActionResult> GetMetadata()
+        [HttpGet]
+        public async Task<IActionResult> GetAllBooks()
         {
             var result = await _bookService.GetAllBooks();
+
+            return Json(result);
+        }
+
+        [HttpGet("books")]
+        public async Task<IActionResult> GetAllBooksPreview()
+        {
+            var result = await _bookService.GetAllBooksPreviews();
 
             return Json(result);
         }

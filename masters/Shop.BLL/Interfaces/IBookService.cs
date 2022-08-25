@@ -10,5 +10,7 @@ namespace Shop.BLL.Interfaces
     public interface IBookService
     {
         Task<IEnumerable<BookDto>> GetAllBooks();
+
+        Task<IEnumerable<BookPreviewDto>> GetAllBooksPreviews();
     }
 }

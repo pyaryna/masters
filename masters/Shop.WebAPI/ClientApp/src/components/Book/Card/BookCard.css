@@ -1,0 +1,38 @@
+.book-card-grid-row{
+    margin: 16px;
+}
+
+.ant-card-cover img{
+    padding: 10px;
+}
+
+.book-card .ant-card-meta-title{
+    min-height: 50px;
+    max-height: 50px;
+    white-space: normal;
+    line-height: 20px;
+}
+
+.book-card-hover{
+    position: absolute;
+    width: calc(100% - 16px);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);   
+    top: 0;
+    left: 8px;
+}
+
+.book-card:hover .book-card-hover{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.book-card-hover-content
+{
+    height: 100%;
+    opacity: 0;
+}
+
+.book-card:hover .book-card-hover-content
+{
+    opacity: 1;
+}

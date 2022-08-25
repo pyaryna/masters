@@ -22,5 +22,15 @@ namespace Shop.DAL.Repository
         {
             return await _shopDBContext.Books.Find(_ => true).ToListAsync();
         }
+
+        public async Task<IEnumerable<Book>> GetAllBooksPreviews()
+        {
+            return await _shopDBContext.Books.Find(_ => true)
+                .Project<Book>(Builders<Book>.Projection.Include(b => b.Id)
+                    .Include(b => b.Title)
+                    .Include(b => b.Author)
+                    .Include(b => b.Price)
+                    .Include(b => b.ImageUrl)).ToListAsync();
+        }
     }
 }

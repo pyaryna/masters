@@ -1,8 +1,9 @@
 import { IBook } from "../types/IBook";
+import { IBookPreview } from "../types/IBookPreview";
 import instanceApi from "../utils/instanceApi";
 
-const getAllBooks = async () => {
-    return await instanceApi.get<IBook[]>('book/books');
+const getAllBooksPreview = async () => {
+    return await instanceApi.get<IBookPreview[]>('book/books');
 };
 
-export { getAllBooks };
+export { getAllBooksPreview };

@@ -10,5 +10,7 @@ namespace Shop.DAL.Interfaces
     public interface IBookRepository
     {
         Task<IEnumerable<Book>> GetAllBooks();
+
+        Task<IEnumerable<Book>> GetAllBooksPreviews();
     }
 }
