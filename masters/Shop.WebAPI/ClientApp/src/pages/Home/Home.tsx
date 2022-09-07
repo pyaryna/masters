@@ -5,16 +5,25 @@ import Filter from "../../components/Filter/Filter";
 import Sorter from "../../components/Filter/Sorter";
 import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
+import { getBooksPreview } from "../../api/BookApi";
 import { IBookPreview } from "../../types/IBookPreview";
-import { getAllBooksPreview } from "../../api/BookApi";
+import { IBookQueryParams } from "../../types/IBookQueryParams";
+import { BooksSortingOption } from "../../types/BooksSortingOption";
 
 import "./Home.css";
 
+const initialQueryParams = {
+  sortBy: BooksSortingOption.None,
+  //pageNumber: pagination.pageNumber,
+  //pageSize: pagination.pageSize,
+}
+
 const Home: FC = memo(() => {
   const [books, setBooks] = useState<IBookPreview[]>();
+  const [queryParams, setQueryParams] = useState<IBookQueryParams>(initialQueryParams);
 
   const fetchBooks = useCallback(() => {
-    getAllBooksPreview()
+    getBooksPreview(queryParams)
       .then((response: { data: IBookPreview[] }) => {
         setBooks(response.data);
         console.log(response.data);
@@ -28,8 +37,8 @@ const Home: FC = memo(() => {
     fetchBooks();
   }, [fetchBooks]);
 
-  const onFilterChange = useCallback(() => {
-
+  const onFilterChange = useCallback((newQueryParams: IBookQueryParams) => {
+    setQueryParams(newQueryParams);
   }, [])
 
   return (

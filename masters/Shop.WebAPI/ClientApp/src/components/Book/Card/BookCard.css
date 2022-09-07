@@ -3,6 +3,7 @@
 }
 
 .ant-card-cover img{
+    width: 100%;
     padding: 0.5rem;
 }
 
@@ -11,6 +12,14 @@
     max-height: 3rem;
     white-space: normal;
     line-height: 1.3rem;
+}
+
+.book-card .ant-card-meta-title a{
+    color: #000000d9;
+}
+
+.book-card .ant-card-meta-title a:hover{
+    text-decoration: underline;
 }
 
 .book-card-hover{

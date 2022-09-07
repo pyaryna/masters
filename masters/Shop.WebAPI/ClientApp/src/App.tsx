@@ -5,19 +5,23 @@ import Home from "./pages/Home/Home";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Layout from "./components/Layout/Layout";
 
+import { MetadataProvider } from "./contexts/MetadataContext";
+
 import "./App.css";
 
 const App: FC = () => (
   <div className="App">
     <BrowserRouter>
-      <Layout>
-        <Switch>
-          {/* <PrivateRoute exact path="/measures" component={Measures} /> */}
+      <MetadataProvider>
+        <Layout>
+          <Switch>
+            {/* <PrivateRoute exact path="/measures" component={Measures} /> */}
 
-          <Route path="/about-us" component={AboutUs} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </Layout>
+            <Route path="/about-us" component={AboutUs} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </Layout>
+      </MetadataProvider>
     </BrowserRouter>
   </div>
 );

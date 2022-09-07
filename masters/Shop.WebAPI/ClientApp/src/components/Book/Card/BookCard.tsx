@@ -1,10 +1,12 @@
 import { FC, memo } from "react";
+import { Link } from "react-router-dom";
 import { Button, Card, Col, Popover, Row } from "antd";
+
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import { IBookPreview } from "../../../types/IBookPreview";
 
 import "./BookCard.css"
-import { ShoppingCartOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -18,18 +20,22 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
       <Card
         hoverable
         cover={
-          <img
-            alt={book.title}
-            src={book.imageUrl}
-          />
+          <Link to={`/books/${book.id}`}>
+            <img
+              alt={book.title}
+              src={book.imageUrl}
+            />
+          </Link>
         }
       >
         {book.author}
         <Meta
           title={
-            <Popover placement="bottom" content={book.title}>
-              {book.title}
-            </Popover>
+            <Link to={`/${book.id}`}>
+              <Popover placement="bottom" content={book.title}>
+                {book.title}
+              </Popover>
+            </Link>
           }
           description={
             <Row justify="space-between" align='middle' className="book-card-desc">
