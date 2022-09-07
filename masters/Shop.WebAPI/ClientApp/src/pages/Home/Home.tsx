@@ -1,6 +1,8 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Col, Row } from "antd";
 
+import Filter from "../../components/Filter/Filter";
+import Sorter from "../../components/Filter/Sorter";
 import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
 import { IBookPreview } from "../../types/IBookPreview";
@@ -26,10 +28,16 @@ const Home: FC = memo(() => {
     fetchBooks();
   }, [fetchBooks]);
 
+  const onFilterChange = useCallback(() => {
+
+  }, [])
+
   return (
-    <div>
-      <Row gutter={16} className="home-row">
+    <div className="home">
+      <Sorter onSorterChange={onFilterChange}/>
+      <Row className="home-books">
         <Col span={6}>
+          <Filter onFilterChange={onFilterChange} />
         </Col>
         <Col span={18}>
           <BookCardGrid books={books || []} />

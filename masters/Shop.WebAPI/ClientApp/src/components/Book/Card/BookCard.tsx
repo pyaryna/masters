@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Button, Card, Popover } from "antd";
+import { Button, Card, Col, Popover, Row } from "antd";
 
 import { IBookPreview } from "../../../types/IBookPreview";
 
@@ -15,6 +15,7 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
   return (
     <div className="book-card">
       <Card
+        hoverable
         cover={
           <img
             alt={book.title}
@@ -29,15 +30,20 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
               {book.title}
             </Popover>
           }
-          description={`${book.price} USD`}
+          description={
+            <Row justify="space-between" align='middle' className="book-card-desc">
+              <Col span={14} className="book-card-price">
+                {book.price} USD
+              </Col>
+              <Col span={8} className="book-card-desc-btn-col">
+                <Button>
+                  Buy
+                </Button>
+              </Col>
+            </Row>
+          }
         />
       </Card>
-      <div className="book-card-hover">
-        <div className="book-card-hover-content">
-          <Button>Button 1</Button>
-          <Button>Button 2</Button>
-        </div>
-      </div>
     </div>
   );
 });

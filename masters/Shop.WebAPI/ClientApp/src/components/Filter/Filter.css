@@ -1,0 +1,51 @@
+.book-filter{
+    padding-left: 1rem;
+    padding-right: 4rem;
+}
+
+.book-sorter{
+    padding: 0 2rem;
+}
+
+.book-sorter .ant-select{
+    min-width: 10rem;
+    margin-left: 1rem;
+}
+
+.book-sorter .ant-input,
+.book-sorter .ant-input:hover,
+.feature-filter .ant-input,
+.feature-filter .ant-input:hover,
+.price-slider .ant-input-number:hover,
+.book-sorter .ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.book-sorter .ant-select:not(.ant-select-customize-input):hover .ant-select-selector{
+    border-color: #FFAA66;
+}
+
+.book-sorter .ant-input:focus,
+.book-sorter .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.feature-filter .ant-input:focus,
+.price-slider .ant-input-number.ant-input-number-focused{
+    border-color: #FFAA66;
+    box-shadow: 0 0 0 2px rgba(255, 122, 51, 0.5);
+}
+
+.book-sorter .ant-select-arrow{
+    color: #FFAA66;
+}
+
+.feature-filter .ant-checkbox:hover .ant-checkbox-inner,
+.feature-filter .ant-checkbox:focus .ant-checkbox-inner,
+.feature-filter .ant-checkbox-wrapper:hover .ant-checkbox-inner, 
+.feature-filter .ant-checkbox-input:focus + .ant-checkbox-inner{
+    border-color: #FFAA66;
+}
+
+.feature-filter .ant-checkbox-checked .ant-checkbox-inner{
+    border-color: #FFAA66;
+    background-color: #FFAA66;
+}
+
+.feature-filter .ant-checkbox-group{
+    margin-top: 1rem;
+}

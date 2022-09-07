@@ -24,11 +24,18 @@ const BookCardGrid: FC<IBookCardGridProps> = memo(({ books, chunkSize = 4 }: IBo
 
   return (
     <div>
-      {bookChunks?.map(chunk =>
-        <Row gutter={16} className="book-card-grid-row">
+      {bookChunks?.map((chunk, index) =>
+        <Row 
+        key={index}
+        gutter={16} 
+        className="book-card-grid-row"
+        >
           {
             chunk.map(item =>
-              <Col span={24 / chunkSize}>
+              <Col 
+              key={item.id}
+              span={24 / chunkSize}
+              >
                 <BookCard book={item} />
               </Col>
             )

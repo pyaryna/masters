@@ -1,5 +1,5 @@
 import { IAuthor } from "./IAuthor";
-import { IGanre } from "./IGanre";
+import { IGenre } from "./IGenre";
 import { IPublisher } from "./IPublisher";
 
 export interface IBook {
@@ -15,5 +15,5 @@ export interface IBook {
 
     author: IAuthor,
     publisher: IPublisher,
-    ganres: IGanre[]
+    genres: IGenre[]
 }

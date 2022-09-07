@@ -1,6 +1,7 @@
-.home-row{
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+.home{
+    margin: 2rem 1rem;
 }
 
-/* TODO: change */
+.home .home-books{
+    margin-top: 1.5rem;
+}
