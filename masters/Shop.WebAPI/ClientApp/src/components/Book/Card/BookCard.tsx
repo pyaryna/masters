@@ -4,6 +4,7 @@ import { Button, Card, Col, Popover, Row } from "antd";
 import { IBookPreview } from "../../../types/IBookPreview";
 
 import "./BookCard.css"
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -37,6 +38,7 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
               </Col>
               <Col span={8} className="book-card-desc-btn-col">
                 <Button>
+                  <ShoppingCartOutlined />
                   Buy
                 </Button>
               </Col>

@@ -25,7 +25,10 @@ namespace Shop.DAL
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ShopDBContext>()
-                .AddScoped<IBookRepository, BookRepository>();
+                .AddScoped<IBookRepository, BookRepository>()
+                .AddScoped<IAuthorRepository, AuthorRepository>()
+                .AddScoped<IPublisherRepository, PublisherRepository>()
+                .AddScoped<IGenreRepository, GenreRepository>();
         }
     }
 }

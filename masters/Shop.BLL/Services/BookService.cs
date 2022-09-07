@@ -3,10 +3,7 @@ using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Shop.BLL.Services

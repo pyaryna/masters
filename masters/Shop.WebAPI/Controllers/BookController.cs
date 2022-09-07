@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.BLL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.WebAPI.Controllers
@@ -26,7 +23,7 @@ namespace Shop.WebAPI.Controllers
             return Json(result);
         }
 
-        [HttpGet("books")]
+        [HttpGet("previews")]
         public async Task<IActionResult> GetAllBooksPreview()
         {
             var result = await _bookService.GetAllBooksPreviews();

@@ -21,6 +21,10 @@ namespace Shop.BLL
             services.AddSingleton(mapper);
 
             services.AddTransient<IBookService, BookService>();
+            services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<IPublisherService, PublisherService>();
+            services.AddTransient<IGenreService, GenreService>();
+            services.AddTransient<IMetadataService, MetadataService>();
         }
     }
 }

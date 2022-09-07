@@ -1,10 +1,5 @@
 ﻿using Shop.DAL.Interfaces;
 using Shop.DAL.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.DAL
 {
@@ -13,6 +8,9 @@ namespace Shop.DAL
         private readonly ShopDBContext _shopDBContext;
 
         private IBookRepository _bookRepository;
+        private IAuthorRepository _authorRepository;
+        private IPublisherRepository _publisherRepository;
+        private IGenreRepository _genreRepository;
 
         public UnitOfWork(ShopDBContext dbContext)
         {
@@ -20,5 +18,8 @@ namespace Shop.DAL
         }
 
         public virtual IBookRepository BookRepository => _bookRepository ??= new BookRepository(_shopDBContext);
+        public virtual IAuthorRepository AuthorRepository => _authorRepository ??= new AuthorRepository(_shopDBContext);
+        public virtual IPublisherRepository PublisherRepository => _publisherRepository ??= new PublisherRepository(_shopDBContext);
+        public virtual IGenreRepository GenreRepository => _genreRepository ??= new GenreRepository(_shopDBContext);
     }
 }

@@ -3,7 +3,11 @@ import { IBookPreview } from "../types/IBookPreview";
 import instanceApi from "../utils/instanceApi";
 
 const getAllBooksPreview = async () => {
-    return await instanceApi.get<IBookPreview[]>('book/books');
+    return await instanceApi.get<IBookPreview[]>('book/previews');
 };
 
-export { getAllBooksPreview };
+const getBookById = async (id: number) => {
+    return await instanceApi.get<IBook>('book/{id}');
+};
+
+export { getAllBooksPreview, getBookById };

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shop.DAL.Configuration
+﻿namespace Shop.DAL.Configuration
 {
     public class CollectionNames
     {
@@ -21,5 +15,7 @@ namespace Shop.DAL.Configuration
         public const string Authors = "authors";
 
         public const string Publishers = "publishers";
+
+        public const string Genres = "genres";
     }
 }

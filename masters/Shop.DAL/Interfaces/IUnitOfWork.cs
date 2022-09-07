@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shop.DAL.Interfaces
+﻿namespace Shop.DAL.Interfaces
 {
     public interface IUnitOfWork
     {
         IBookRepository BookRepository { get; }
+        IAuthorRepository AuthorRepository { get; }
+        IPublisherRepository PublisherRepository { get; }
+        IGenreRepository GenreRepository { get; }
     }
 }
