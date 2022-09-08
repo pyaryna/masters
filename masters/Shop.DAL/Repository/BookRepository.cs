@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Shop.DAL.Repository
 
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
-            return await _shopDBContext.Books.Find(_ => true).ToListAsync();
+            return (await _shopDBContext.Books.FindAsync(_ => true)).ToList();
         }
 
         public async Task<IEnumerable<Book>> GetAllBooksPreviews()
@@ -28,6 +29,13 @@ namespace Shop.DAL.Repository
                     .Include(b => b.Author)
                     .Include(b => b.Price)
                     .Include(b => b.ImageUrl)).ToListAsync();
+        }
+
+        public async Task<Book> GetBookById(ObjectId id)
+        {
+            return (await _shopDBContext.Books
+                .FindAsync(b => b.Id == id))
+                .FirstOrDefault();
         }
     }
 }

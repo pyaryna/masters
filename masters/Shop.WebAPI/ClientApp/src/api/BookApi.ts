@@ -23,8 +23,8 @@ const getBooksPreview = async (params: IBookQueryParams) => {
     );
 };
 
-const getBookById = async (id: number) => {
-    return await instanceApi.get<IBook>('book/{id}');
+const getBookById = async (id: string) => {
+    return await instanceApi.get<IBook>(`book/${id}`);
 };
 
 export { getBooksPreview, getBookById };

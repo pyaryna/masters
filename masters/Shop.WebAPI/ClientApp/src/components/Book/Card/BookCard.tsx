@@ -20,7 +20,7 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
       <Card
         hoverable
         cover={
-          <Link to={`/books/${book.id}`}>
+          <Link to={`/${book.id}`}>
             <img
               alt={book.title}
               src={book.imageUrl}

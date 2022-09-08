@@ -1,4 +1,4 @@
-import { memo, FC, useState, useCallback, useEffect } from "react";
+import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
 import { Col, Row } from "antd";
 
 import Filter from "../../components/Filter/Filter";
@@ -7,20 +7,14 @@ import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
 import { getBooksPreview } from "../../api/BookApi";
 import { IBookPreview } from "../../types/IBookPreview";
+import { FilterContext } from "../../contexts/FilterContext";
 import { IBookQueryParams } from "../../types/IBookQueryParams";
-import { BooksSortingOption } from "../../types/BooksSortingOption";
 
 import "./Home.css";
 
-const initialQueryParams = {
-  sortBy: BooksSortingOption.None,
-  //pageNumber: pagination.pageNumber,
-  //pageSize: pagination.pageSize,
-}
-
 const Home: FC = memo(() => {
   const [books, setBooks] = useState<IBookPreview[]>();
-  const [queryParams, setQueryParams] = useState<IBookQueryParams>(initialQueryParams);
+  const [queryParams, setQueryParams] = useContext(FilterContext);
 
   const fetchBooks = useCallback(() => {
     getBooksPreview(queryParams)

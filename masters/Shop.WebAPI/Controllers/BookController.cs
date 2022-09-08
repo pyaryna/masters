@@ -30,5 +30,13 @@ namespace Shop.WebAPI.Controllers
 
             return Json(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBookById(string id)
+        {
+            var result = await _bookService.GetBookById(id);
+
+            return Json(result);
+        }
     }
 }

@@ -1,0 +1,21 @@
+.details-table td{
+    min-width: 10rem;
+}
+
+.details-table .ant-collapse-header{
+    font-weight: 700;
+}
+
+.details-table .ant-collapse-ghost > .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box{
+    padding-top: 0;
+}
+
+.book-genre a,
+.book-publisher a{
+    color: #000000d9;
+}
+
+.book-genre a:hover,
+.book-publisher a:hover{
+    color: #FFAA66;
+}

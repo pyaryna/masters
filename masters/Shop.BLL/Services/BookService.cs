@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,6 +35,21 @@ namespace Shop.BLL.Services
             var books = await _unitOfWork.BookRepository.GetAllBooksPreviews();
 
             return _mapper.Map<IEnumerable<Book>, IEnumerable<BookPreviewDto>>(books);
+        }
+
+        public async Task<BookDto> GetBookById(string strId)
+        {
+            ObjectId id;
+            var successParsed = ObjectId.TryParse(strId, out id);
+
+            if (!successParsed)
+            {
+                throw new Exception("Cannot parse id");
+            }
+            
+            var book = await _unitOfWork.BookRepository.GetBookById(id);
+
+            return _mapper.Map<Book, BookDto>(book);
         }
     }
 }

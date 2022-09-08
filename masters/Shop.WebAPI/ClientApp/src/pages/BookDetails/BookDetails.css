@@ -1,0 +1,64 @@
+.book-details{
+    margin: 2rem 5rem;
+}
+
+.book-desc-block,
+.book-price{
+    padding: 1rem;
+}
+
+.details-img .ant-image{
+    margin: 3rem;
+}
+
+.book-author a{
+    color: #000000d9;
+}
+
+.book-author a:hover{
+    color: #FFAA66;
+}
+
+.book-title{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.book-desc{
+    margin-top: 1rem;
+}
+
+.book-price{
+    font-weight: 700;
+}
+
+.ant-btn.details-buy-btn{
+    margin-top: 1rem;
+    min-width: 7rem;
+    min-height: 2.5rem;
+    background-color: #FFAA66;    
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.ant-btn.details-buy-btn:hover,
+.ant-btn.details-buy-btn:focus{
+    color: #FFAA66;    
+    background-color: #FFFFFF;
+    border-color: #FFAA66;
+}
+
+.desc-more-btn{
+    float: right;
+}
+
+.desc-more-btn .ant-btn,
+.desc-more-btn .ant-btn:hover,
+.desc-more-btn .ant-btn:focus{    
+    color: #FFAA66;
+    background-color: #FFFFFF;
+}
+
+.desc-more-btn .ant-btn.ant-btn-text:hover span{
+    text-decoration: underline;
+}

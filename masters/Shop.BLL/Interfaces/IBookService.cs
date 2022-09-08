@@ -9,5 +9,7 @@ namespace Shop.BLL.Interfaces
         Task<IEnumerable<BookDto>> GetAllBooks();
 
         Task<IEnumerable<BookPreviewDto>> GetAllBooksPreviews();
+
+        Task<BookDto> GetBookById(string id);
     }
 }

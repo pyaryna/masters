@@ -7,7 +7,7 @@ export interface IBook {
     title: string,
     description: string,
     price: number,
-    ISBN: string,
+    isbn: string,
     pageCount: number,
     language: string,
     publishedDate: Date,

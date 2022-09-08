@@ -15,7 +15,7 @@ interface IFilterProps {
 }
 
 const Filter: FC<IFilterProps> = memo(({ onFilterChange }: IFilterProps) => {
-  const [metadata, setMetadata] = useContext(MetadataContext);
+  const metadata = useContext(MetadataContext);
 
   return (
     <div className="book-filter">
