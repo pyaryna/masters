@@ -17,7 +17,7 @@ namespace Shop.DAL.Repository
 
         public async Task<IEnumerable<Publisher>> GetAllPublishers()
         {
-            return await _shopDBContext.Publishers.Find(_ => true).ToListAsync();
+            return (await _shopDBContext.Publishers.FindAsync(_ => true)).ToList();
         }
     }
 }

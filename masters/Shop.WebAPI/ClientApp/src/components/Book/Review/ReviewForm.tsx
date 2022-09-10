@@ -52,7 +52,7 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId }: IReviewFormProps) => 
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Input.TextArea>
+                        <Input.TextArea className="review-text-area">
                         </Input.TextArea>
                     </Form.Item>
                     <Form.Item>

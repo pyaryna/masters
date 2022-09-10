@@ -26,6 +26,7 @@ namespace Shop.BLL
             services.AddTransient<IGenreService, GenreService>();
             services.AddTransient<IMetadataService, MetadataService>();
             services.AddTransient<IRateService, RateService>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }

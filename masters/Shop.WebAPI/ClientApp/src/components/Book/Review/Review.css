@@ -47,3 +47,12 @@
     background-color: #FFFFFF;
     border: 1px solid #FFAA66;
 }
+
+.review-form .review-text-area:hover{
+    border-color: #FFAA66;
+}
+
+.review-form .review-text-area:focus{
+    border-color: #FFAA66;
+    box-shadow: 0 0 0 2px rgba(255, 122, 51, 0.5);
+}

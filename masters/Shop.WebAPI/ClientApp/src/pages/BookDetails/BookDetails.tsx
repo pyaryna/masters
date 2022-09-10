@@ -52,12 +52,10 @@ const BookDetails: FC = memo(() => {
                                 {book.title}
                             </div>
                             <div className="book-desc">
-                                <div>
-                                    <Text
-                                        ellipsis={shortDesc}
-                                    >
-                                        {book.description}
-                                    </Text>
+                                <div
+                                    className={shortDesc ? "short-desc" : ""}
+                                >
+                                    {book.description}
                                 </div>
                                 <div className="desc-more-btn">
                                     <Button

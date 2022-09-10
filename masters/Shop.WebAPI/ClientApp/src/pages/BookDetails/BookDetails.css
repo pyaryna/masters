@@ -28,6 +28,11 @@
     margin-top: 1rem;
 }
 
+.book-desc .short-desc{
+    max-height: 7rem;
+    overflow: hidden;
+}
+
 .book-price{
     font-weight: 700;
 }

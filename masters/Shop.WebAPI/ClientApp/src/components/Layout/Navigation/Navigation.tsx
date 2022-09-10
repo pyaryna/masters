@@ -30,6 +30,20 @@ const Navigation: FC = memo(() => {
             </Col>
             <Col className="nav-item">
               <NavigationTab
+                title="Statistical"
+                url="/stat-recom"
+                isActive={location && location.pathname === "/stat-recom"}
+              />
+            </Col>
+            <Col className="nav-item">
+              <NavigationTab
+                title="Other"
+                url="/other-recom"
+                isActive={location && location.pathname === "/other-recom"}
+              />
+            </Col>
+            <Col className="nav-item">
+              <NavigationTab
                 title="Contacts"
                 url="/contacts"
                 isActive={location && location.pathname === "/contacts"}

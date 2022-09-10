@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace Shop.DAL.Repository
 {
-    public class AuthorRepository : IAuthorRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ShopDBContext _shopDBContext;
 
-        public AuthorRepository(ShopDBContext shopDBContext)
+        public UserRepository(ShopDBContext shopDBContext)
         {
             _shopDBContext = shopDBContext;
         }
 
-        public async Task<IEnumerable<Author>> GetAllAuthors()
+        public async Task<IEnumerable<BaseUser>> GetBaseUsers()
         {
-            return (await _shopDBContext.Authors.FindAsync(_ => true)).ToList();
+            return await _shopDBContext.Users.Find(_ => true)
+                .Limit(10)
+                .ToListAsync();
         }
     }
 }

@@ -19,3 +19,7 @@
 .book-publisher a:hover{
     color: #FFAA66;
 }
+
+.details-table table tr td{
+    padding-bottom: 1rem;
+}

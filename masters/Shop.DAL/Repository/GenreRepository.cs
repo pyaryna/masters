@@ -17,7 +17,7 @@ namespace Shop.DAL.Repository
 
         public async Task<IEnumerable<Genre>> GetAllGenres()
         {
-            return await _shopDBContext.Genres.Find(_ => true).ToListAsync();
+            return (await _shopDBContext.Genres.FindAsync(_ => true)).ToList();
         }
     }
 }

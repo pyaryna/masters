@@ -11,30 +11,6 @@
   color: #ffffff;
 }
 
-.header .contacts-icon {
-  color: #ffffff;
-  margin-right: 0.5rem;
-}
-
-.header .contacts,
-.header .auth-control {
-  padding-bottom: 0.5rem;
-}
-
-.header .contacts,
-.header .contacts a,
-.header .auth-control a {
-  font-size: 1rem;
-  line-height: 1rem;
-  font-weight: 500;
-  color: #ffffff;
-}
-
-.header .contacts:hover a,
-.header .auth-control:hover a {
-  text-decoration: underline;
-}
-
 .ant-layout-content {
   background-color: #ffffff;
 }
@@ -45,4 +21,25 @@
   font-weight: 500;
   color: #ffffff;
   font-size: 1.2rem;
+}
+
+.user-select .user-label {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  float: left;
+}
+
+.user-select .ant-select {
+  min-width: 10rem;
+}
+
+.user-select .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #FFAA66;
+}
+
+.user-select .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-color: #FFAA66;
+  box-shadow: 0 0 0 2px rgba(255, 122, 51, 0.5);
 }

@@ -17,6 +17,7 @@ namespace Shop.DAL
             Publishers = _mongoDatabase.GetCollection<Publisher>(CollectionNames.Publishers);
             Genres = _mongoDatabase.GetCollection<Genre>(CollectionNames.Genres);
             Rates = _mongoDatabase.GetCollection<Rate>(CollectionNames.Rates);
+            Users = _mongoDatabase.GetCollection<User>(CollectionNames.Users);
         }
 
         public virtual IMongoCollection<Book> Books { get; set; }
@@ -24,5 +25,6 @@ namespace Shop.DAL
         public virtual IMongoCollection<Publisher> Publishers { get; set; }
         public virtual IMongoCollection<Genre> Genres { get; set; }
         public virtual IMongoCollection<Rate> Rates { get; set; }
+        public virtual IMongoCollection<User> Users { get; set; }
     }
 }

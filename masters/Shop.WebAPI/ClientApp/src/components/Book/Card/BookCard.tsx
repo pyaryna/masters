@@ -39,10 +39,10 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
           }
           description={
             <Row justify="space-between" align='middle' className="book-card-desc">
-              <Col span={14} className="book-card-price">
+              <Col span={12} className="book-card-price">
                 {book.price} USD
               </Col>
-              <Col span={8} className="book-card-desc-btn-col">
+              <Col span={11} className="book-card-desc-btn-col">
                 <Button>
                   <ShoppingCartOutlined />
                   Buy

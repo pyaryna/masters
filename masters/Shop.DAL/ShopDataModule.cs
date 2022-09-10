@@ -29,7 +29,8 @@ namespace Shop.DAL
                 .AddScoped<IAuthorRepository, AuthorRepository>()
                 .AddScoped<IPublisherRepository, PublisherRepository>()
                 .AddScoped<IGenreRepository, GenreRepository>()
-                .AddScoped<IRateRepository, RateRepository>();
+                .AddScoped<IRateRepository, RateRepository>()
+                .AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

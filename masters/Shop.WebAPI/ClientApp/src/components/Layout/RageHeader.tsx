@@ -1,10 +1,11 @@
-import { FC, memo, useCallback, useEffect, useState } from "react";
+import { FC, memo, useCallback, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout as AntLayout, Row, Col, Select } from "antd";
 
-import { IUser } from "../../types/IUser";
+import { getBaseUsers } from "../../api/UserApi";
+import { IBaseUser } from "../../types/IBaseUser";
 
-import { PhoneOutlined, MailOutlined, FacebookFilled } from "@ant-design/icons";
+import { UserContext } from "../../contexts/UserContext";
 
 import "./Layout.css";
 
@@ -12,15 +13,31 @@ const { Header } = AntLayout;
 const { Option } = Select;
 
 const RageHeader: FC = memo(() => {
-  const [users, setUsers] = useState<IUser>();
+  const [users, setUsers] = useState<IBaseUser[]>();
+  const [currentUser, setCurrentUser] = useContext(UserContext);
 
   const fetchUsers = useCallback(() => {
-
+    getBaseUsers()
+      .then((response: { data: IBaseUser[] }) => {
+        setUsers(response.data);
+        console.log(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
   }, [setUsers])
 
   useEffect(() => {
     fetchUsers()
   }, [fetchUsers])
+
+  useEffect(() => {
+    if(users){
+      setCurrentUser(users[0])
+    }
+  }, [users, setCurrentUser])
+
+  console.log(currentUser)
 
   return (
     <AntLayout className="layout">
@@ -31,46 +48,33 @@ const RageHeader: FC = memo(() => {
               White books
             </Link>
           </Col>
-          <Col span={6} >
-            User
-            <Select >
-
-            </Select>
+          <Col span={5}
+            className='user-select'
+          >
+            {currentUser ?
+              <Row align="middle" gutter={16}>
+                <Col>
+                  <div className="user-label">
+                    User
+                  </div>
+                </Col>
+                <Col>
+                  <Select
+                    defaultValue={currentUser.id}
+                  >
+                    {users?.map(u =>
+                      <Option
+                        key={u.id}
+                        value={u.id}
+                      >
+                        {u.name}
+                      </Option>
+                    )}
+                  </Select>
+                </Col>
+              </Row>
+              : <></>}
           </Col>
-          {/* <Col span={4}>
-            <Row align="middle">
-              <Col>
-                <PhoneOutlined className="contacts-icon" />
-              </Col>
-              <Col>
-                <Row className="contacts">(032) 292-00-00</Row>
-                <Row className="contacts">(032) 255-00-00</Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col span={4}>
-            <Row className="contacts">
-              <MailOutlined className="contacts-icon" />
-              <a href="mailto:p.yaryna@gmail.com">Write us</a>
-            </Row>
-            <Row className="contacts">
-              <FacebookFilled className="contacts-icon" />
-              <a href="https://www.facebook.com/profile.php?id=100008201021812"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Facebook
-              </a>
-            </Row>
-          </Col>
-          <Col span={4}>
-            <Row className="auth-control">
-              <Link to="/">Log in</Link>
-            </Row>
-            <Row className="auth-control">
-              <Link to="/">Sign up</Link>
-            </Row>
-          </Col> */}
         </Row>
       </Header>
     </AntLayout>

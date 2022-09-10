@@ -5,6 +5,7 @@ using Shop.BLL.Interfaces;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.BLL.Services
@@ -33,6 +34,7 @@ namespace Shop.BLL.Services
             }
 
             var rate = await _unitOfWork.RateRepository.GetRatesByBookId(id);
+            rate.Reviews = rate.Reviews.OrderByDescending(r => r.CreatedAt).ToList();
 
             return _mapper.Map<Rate, RateDto>(rate);
         }
