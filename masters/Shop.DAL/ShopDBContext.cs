@@ -16,12 +16,13 @@ namespace Shop.DAL
             Authors = _mongoDatabase.GetCollection<Author>(CollectionNames.Authors);
             Publishers = _mongoDatabase.GetCollection<Publisher>(CollectionNames.Publishers);
             Genres = _mongoDatabase.GetCollection<Genre>(CollectionNames.Genres);
+            Rates = _mongoDatabase.GetCollection<Rate>(CollectionNames.Rates);
         }
 
         public virtual IMongoCollection<Book> Books { get; set; }
         public virtual IMongoCollection<Author> Authors { get; set; }
         public virtual IMongoCollection<Publisher> Publishers { get; set; }
         public virtual IMongoCollection<Genre> Genres { get; set; }
-
+        public virtual IMongoCollection<Rate> Rates { get; set; }
     }
 }

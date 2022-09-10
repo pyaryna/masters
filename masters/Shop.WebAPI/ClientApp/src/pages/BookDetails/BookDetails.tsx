@@ -1,10 +1,11 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import { Col, Row, Image, Typography, Button } from "antd";
+import { Col, Row, Image, Typography, Button, Divider } from "antd";
 
 import { IBook } from "../../types/IBook";
 import { getBookById } from "../../api/BookApi";
+import ReviewBlock from "../../components/Book/Review/ReviewBlock";
 import DetailsTable from "../../components/Book/Details/DetailsTable";
 
 import "./BookDetails.css";
@@ -79,6 +80,10 @@ const BookDetails: FC = memo(() => {
                         </div>
                     </Col>
                 </Row>
+                <div>
+                    <Divider />
+                    <ReviewBlock bookId={id} />
+                </div>
             </div>
             : <></>
     );

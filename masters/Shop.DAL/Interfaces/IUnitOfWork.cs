@@ -6,5 +6,6 @@
         IAuthorRepository AuthorRepository { get; }
         IPublisherRepository PublisherRepository { get; }
         IGenreRepository GenreRepository { get; }
+        IRateRepository RateRepository { get; }
     }
 }

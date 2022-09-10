@@ -1,6 +1,6 @@
 import { FC, memo, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Layout as AntLayout, Row, Col } from "antd";
+import { Layout as AntLayout, Row, Col, Select } from "antd";
 
 import { IUser } from "../../types/IUser";
 
@@ -9,6 +9,7 @@ import { PhoneOutlined, MailOutlined, FacebookFilled } from "@ant-design/icons";
 import "./Layout.css";
 
 const { Header } = AntLayout;
+const { Option } = Select;
 
 const RageHeader: FC = memo(() => {
   const [users, setUsers] = useState<IUser>();
@@ -24,13 +25,19 @@ const RageHeader: FC = memo(() => {
   return (
     <AntLayout className="layout">
       <Header className="header">
-        <Row className="page-header-row" justify="space-around" align="middle">
-          <Col span={5}>
+        <Row className="page-header-row" justify="space-between" align="middle">
+          <Col span={6}>
             <Link className="logo" to="/">
               White books
             </Link>
           </Col>
-          <Col span={4}>
+          <Col span={6} >
+            User
+            <Select >
+
+            </Select>
+          </Col>
+          {/* <Col span={4}>
             <Row align="middle">
               <Col>
                 <PhoneOutlined className="contacts-icon" />
@@ -63,7 +70,7 @@ const RageHeader: FC = memo(() => {
             <Row className="auth-control">
               <Link to="/">Sign up</Link>
             </Row>
-          </Col>
+          </Col> */}
         </Row>
       </Header>
     </AntLayout>

@@ -14,7 +14,7 @@ namespace Shop.BLL
             // mapper
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new BookProfile());
+                mc.AddProfile(new MappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -25,6 +25,7 @@ namespace Shop.BLL
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<IGenreService, GenreService>();
             services.AddTransient<IMetadataService, MetadataService>();
+            services.AddTransient<IRateService, RateService>();
         }
     }
 }

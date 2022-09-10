@@ -39,13 +39,14 @@
     background-color: #FFAA66;    
     color: #FFFFFF;
     font-weight: 700;
+    border: none;
 }
 
 .ant-btn.details-buy-btn:hover,
 .ant-btn.details-buy-btn:focus{
     color: #FFAA66;    
     background-color: #FFFFFF;
-    border-color: #FFAA66;
+    border: 1px solid #FFAA66;
 }
 
 .desc-more-btn{

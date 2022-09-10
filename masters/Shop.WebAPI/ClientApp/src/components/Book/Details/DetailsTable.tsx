@@ -78,7 +78,7 @@ const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps)
                                     Published date
                                 </td>
                                 <td>
-                                    {moment(book.publishedDate).format('MM/DD/YYYY')}
+                                    {moment(book.publishedDate).format('DD/MM/YYYY')}
                                 </td>
                             </tr>
                         </tbody>
