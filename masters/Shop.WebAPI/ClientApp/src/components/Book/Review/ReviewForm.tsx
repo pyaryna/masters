@@ -17,11 +17,9 @@ interface IReviewFormProps {
 const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewFormProps) => {
     const [form] = Form.useForm();
     const [user] = useContext(UserContext);
-    const [disableSaveButton, setDisableSaveButton] = useState<boolean>(false);
 
     const onFinish = useCallback(() => {
         form.validateFields().then((values: IAddReview) => {
-            setDisableSaveButton(true);
             if (user) {
                 const itemToSend: IAddReview = {
                     ...values,
@@ -30,14 +28,13 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                     createdAt: new Date()
                 };
                 console.log(itemToSend);
-                // addReview(values)
-                //     .then(() => {
-                //         onAddReview();
-                //         setDisableSaveButton(false);
-                //     })
-                //     .catch((e: Error) => {
-                //         console.log(e);
-                //     });
+                addReview(itemToSend)
+                    .then(() => {
+                        onAddReview();
+                    })
+                    .catch((e: Error) => {
+                        console.log(e);
+                    });
             }
         });
     }, [form, user, bookId]);
@@ -100,7 +97,6 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                         <Button
                             htmlType="submit"
                             className="review-submit-btn"
-                            disabled={disableSaveButton}
                         >
                             Submit
                         </Button>

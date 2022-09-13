@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace Shop.WebAPI.Controllers
@@ -21,6 +23,21 @@ namespace Shop.WebAPI.Controllers
             var result = await _rateService.GetRatesByBookId(id);
 
             return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddReviewDto review)
+        {
+            try
+            {
+                await _rateService.AddReviewToBook(review);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+           
+            return Ok();
         }
     }
 }

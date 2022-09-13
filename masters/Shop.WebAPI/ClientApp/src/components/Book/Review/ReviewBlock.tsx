@@ -31,8 +31,8 @@ const ReviewBlock: FC<IReviewBlockProps> = memo(({ bookId }: IReviewBlockProps) 
     }, [fetchRate])
 
     const onAddReview = useCallback(() => {
-
-    }, [])
+        fetchRate();
+    }, [fetchRate])
 
     return (
         <div className="book-review-block">

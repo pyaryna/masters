@@ -6,5 +6,7 @@ namespace Shop.BLL.Interfaces
     public interface IRateService
     {
         Task<RateDto> GetRatesByBookId(string bookId);
+
+        Task AddReviewToBook(AddReviewDto review);
     }
 }

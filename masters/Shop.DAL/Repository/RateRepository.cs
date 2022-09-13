@@ -22,5 +22,11 @@ namespace Shop.DAL.Repository
                 .FindAsync(r => r.BookId == bookId))
                 .FirstOrDefault();
         }
+
+        public async Task AddReviewToBook(Review review, ObjectId bookId)
+        {
+            var update = Builders<Rate>.Update.Push("reviews", review);
+            await _shopDBContext.Rates.UpdateOneAsync(r => r.BookId == bookId, update);
+        }
     }
 }

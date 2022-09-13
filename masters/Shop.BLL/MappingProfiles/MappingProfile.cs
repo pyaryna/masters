@@ -23,11 +23,14 @@ namespace Shop.BLL.MappingProfiles
                 .ForMember(gd => gd.Id, opt => opt.MapFrom(g => g.Id.ToString()));
 
             CreateMap<BaseUser, BaseUserDto>()
-                .ForMember(ad => ad.Id, opt => opt.MapFrom(a => a.Id.ToString()));
+                .ForMember(ad => ad.Id, opt => opt.MapFrom(a => a.Id.ToString()))
+                .ReverseMap();
             CreateMap<User, UserDto>();
             CreateMap<Review, ReviewDto>();
             CreateMap<Rate, RateDto>()
                 .ForMember(ad => ad.Id, opt => opt.MapFrom(a => a.Id.ToString()));
+
+            CreateMap<AddReviewDto, Review>();
         }
     }
 }
