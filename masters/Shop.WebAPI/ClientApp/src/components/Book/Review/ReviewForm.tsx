@@ -1,22 +1,48 @@
-import { FC, memo, useCallback, useState } from "react";
+import { FC, memo, useCallback, useContext, useState } from "react";
 import { Button, Collapse, Form, Input, Rate } from "antd";
 
-import { IRate } from "../../../types/IRate";
+import { addReview } from "../../../api/RateApi";
+import { IAddReview } from "../../../types/IAddReview";
+import { UserContext } from "../../../contexts/UserContext";
 
 import "./Review.css"
 
 const { Panel } = Collapse;
 
 interface IReviewFormProps {
-    bookId: string
+    bookId: string,
+    onAddReview: Function
 }
 
-const ReviewForm: FC<IReviewFormProps> = memo(({ bookId }: IReviewFormProps) => {
-    const [rate, setRate] = useState<IRate>();
+const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewFormProps) => {
+    const [form] = Form.useForm();
+    const [user] = useContext(UserContext);
+    const [disableSaveButton, setDisableSaveButton] = useState<boolean>(false);
 
     const onFinish = useCallback(() => {
-        console.log();
-    }, []);
+        form.validateFields().then((values: IAddReview) => {
+            setDisableSaveButton(true);
+            if (user) {
+                const itemToSend: IAddReview = {
+                    ...values,
+                    user: user,
+                    bookId: bookId,
+                    createdAt: new Date()
+                };
+                console.log(itemToSend);
+                // addReview(values)
+                //     .then(() => {
+                //         onAddReview();
+                //         setDisableSaveButton(false);
+                //     })
+                //     .catch((e: Error) => {
+                //         console.log(e);
+                //     });
+            }
+        });
+    }, [form, user, bookId]);
+
+    console.log(user);
 
     return (
         <Collapse
@@ -40,25 +66,41 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId }: IReviewFormProps) => 
                     Add new review
                 </h3>
                 <Form
+                    form={form}
                     name="review"
                     onFinish={onFinish}
                 >
                     <Form.Item
-
+                        hidden={true}
+                        initialValue={bookId}
+                    ></Form.Item>
+                    <Form.Item
+                        hidden={true}
+                        initialValue={user}
+                    ></Form.Item>
+                    <Form.Item
+                        name="rate"
+                        initialValue={0}
                     >
                         <Rate
                             allowHalf
                             style={{ color: "#FFAA66", fontSize: "1rem" }}
                         />
                     </Form.Item>
-                    <Form.Item>
-                        <Input.TextArea className="review-text-area">
-                        </Input.TextArea>
+                    <Form.Item
+                        name="comment"
+                        rules={[
+                            { required: true, message: "Please write your comment!" },
+                        ]}
+                    >
+                        <Input.TextArea className="review-text-area" />
                     </Form.Item>
-                    <Form.Item>
-                        <Button 
-                        htmlType="submit"
-                        className="review-submit-btn"
+                    <Form.Item
+                    >
+                        <Button
+                            htmlType="submit"
+                            className="review-submit-btn"
+                            disabled={disableSaveButton}
                         >
                             Submit
                         </Button>

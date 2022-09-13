@@ -25,7 +25,7 @@ const Home: FC = memo(() => {
       .catch((e: Error) => {
         console.log(e);
       });
-  }, [setBooks]);
+  }, [setBooks, queryParams]);
 
   useEffect(() => {
     fetchBooks();
@@ -33,11 +33,11 @@ const Home: FC = memo(() => {
 
   const onFilterChange = useCallback((newQueryParams: IBookQueryParams) => {
     setQueryParams(newQueryParams);
-  }, [])
+  }, [setQueryParams])
 
   return (
     <div className="home">
-      <Sorter onSorterChange={onFilterChange}/>
+      <Sorter onSorterChange={onFilterChange} />
       <Row className="home-books">
         <Col span={6}>
           <Filter onFilterChange={onFilterChange} />

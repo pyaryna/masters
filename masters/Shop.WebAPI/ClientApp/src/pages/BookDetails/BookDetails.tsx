@@ -1,16 +1,15 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import { Col, Row, Image, Typography, Button, Divider } from "antd";
+import { Col, Row, Image, Button, Divider } from "antd";
 
 import { IBook } from "../../types/IBook";
 import { getBookById } from "../../api/BookApi";
 import ReviewBlock from "../../components/Book/Review/ReviewBlock";
+import SimilarBlock from "../../components/Book/Similar/SimilarBlock";
 import DetailsTable from "../../components/Book/Details/DetailsTable";
 
 import "./BookDetails.css";
-
-const { Text } = Typography;
 
 const BookDetails: FC = memo(() => {
     const { id } = useParams<{ id: string }>();
@@ -26,7 +25,7 @@ const BookDetails: FC = memo(() => {
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setBook]);
+    }, [setBook, id]);
 
     useEffect(() => {
         fetchBook();
@@ -35,52 +34,58 @@ const BookDetails: FC = memo(() => {
     return (
         book ?
             <div className="book-details">
-                <Row gutter={16}>
-                    <Col span={8} className="details-img">
-                        <Image
-                            src={book.imageUrl}
-                        />
-                    </Col>
-                    <Col span={16}>
-                        <div className="book-desc-block">
-                            <div className="book-author">
-                                <Link to="/">
-                                    {book.author.name}
-                                </Link>
-                            </div>
-                            <div className="book-title">
-                                {book.title}
-                            </div>
-                            <div className="book-desc">
-                                <div
-                                    className={shortDesc ? "short-desc" : ""}
-                                >
-                                    {book.description}
+                <div>   
+                    <Row gutter={16}>
+                        <Col span={8} className="details-img">
+                            <Image
+                                src={book.imageUrl}
+                            />
+                        </Col>
+                        <Col span={16}>
+                            <div className="book-desc-block">
+                                <div className="book-author">
+                                    <Link to="/">
+                                        {book.author.name}
+                                    </Link>
                                 </div>
-                                <div className="desc-more-btn">
-                                    <Button
-                                        type="text"
-                                        onClick={() => setShortDesc(!shortDesc)}
+                                <div className="book-title">
+                                    {book.title}
+                                </div>
+                                <div className="book-desc">
+                                    <div
+                                        className={shortDesc ? "short-desc" : ""}
                                     >
-                                        {shortDesc ? "more..." : "less"}
-                                    </Button>
+                                        {book.description}
+                                    </div>
+                                    <div className="desc-more-btn">
+                                        <Button
+                                            type="text"
+                                            onClick={() => setShortDesc(!shortDesc)}
+                                        >
+                                            {shortDesc ? "more..." : "less"}
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <DetailsTable book={book} />
-                        <div className="book-price">
-                            <div>
-                                {book.price} USD
+                            <DetailsTable book={book} />
+                            <div className="book-price">
+                                <div>
+                                    {book.price} USD
+                                </div>
+                                <Button className="details-buy-btn">
+                                    To card
+                                </Button>
                             </div>
-                            <Button className="details-buy-btn">
-                                To card
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
+                        </Col>
+                    </Row>
+                    <div>
+                        <Divider />
+                        <ReviewBlock bookId={id} />
+                    </div>
+                </div>
                 <div>
                     <Divider />
-                    <ReviewBlock bookId={id} />
+                    <SimilarBlock bookId={id} />
                 </div>
             </div>
             : <></>

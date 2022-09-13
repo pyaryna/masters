@@ -11,7 +11,7 @@ import "./BookCard.css"
 const { Meta } = Card;
 
 interface IBookCardProps {
-  book: IBookPreview
+  book: IBookPreview;
 }
 
 const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
@@ -38,17 +38,25 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
             </Link>
           }
           description={
-            <Row justify="space-between" align='middle' className="book-card-desc">
-              <Col span={12} className="book-card-price">
-                {book.price} USD
-              </Col>
-              <Col span={11} className="book-card-desc-btn-col">
-                <Button>
-                  <ShoppingCartOutlined />
-                  Buy
-                </Button>
-              </Col>
-            </Row>
+            <div>
+              <Row justify="space-between" align='middle' className="book-card-desc">
+                <Col span={14} className="book-card-price">
+                  {book.price} USD
+                </Col>
+                <Col span={6} className="book-card-desc-btn-col">
+                  <Button>
+                    <ShoppingCartOutlined />
+                  </Button>
+                </Col>
+              </Row>
+              {
+                (book.similarityRate) ?
+                  <Row>
+                    {book.similarityRate}
+                  </Row>
+                  : <></>
+              }
+            </div>
           }
         />
       </Card>

@@ -24,18 +24,25 @@ const ReviewBlock: FC<IReviewBlockProps> = memo(({ bookId }: IReviewBlockProps) 
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setRate])
+    }, [setRate, bookId])
 
     useEffect(() => {
         fetchRate();
     }, [fetchRate])
+
+    const onAddReview = useCallback(() => {
+
+    }, [])
 
     return (
         <div className="book-review-block">
             <h2>
                 Reviews
             </h2>
-            <ReviewForm bookId={bookId} />
+            <ReviewForm 
+            bookId={bookId}
+            onAddReview={onAddReview}
+            />
             {
                 rate?.reviews.map(r =>
                     <Review

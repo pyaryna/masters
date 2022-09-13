@@ -4,7 +4,6 @@ import { Layout as AntLayout, Row, Col, Select } from "antd";
 
 import { getBaseUsers } from "../../api/UserApi";
 import { IBaseUser } from "../../types/IBaseUser";
-
 import { UserContext } from "../../contexts/UserContext";
 
 import "./Layout.css";
@@ -37,7 +36,10 @@ const RageHeader: FC = memo(() => {
     }
   }, [users, setCurrentUser])
 
-  console.log(currentUser)
+  const changeCurrentUser = useCallback((value: string) => {
+    let user = users?.find(u => u.id === value);
+    setCurrentUser(user);
+  }, [users, setCurrentUser])
 
   return (
     <AntLayout className="layout">
@@ -61,6 +63,7 @@ const RageHeader: FC = memo(() => {
                 <Col>
                   <Select
                     defaultValue={currentUser.id}
+                    onChange={(value) => changeCurrentUser(value)}
                   >
                     {users?.map(u =>
                       <Option

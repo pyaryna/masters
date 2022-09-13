@@ -1,23 +1,57 @@
-.header .contacts-icon {
-    color: #ffffff;
-    margin-right: 0.5rem;
-  }
-  
-  .header .contacts,
-  .header .auth-control {
-    padding-bottom: 0.5rem;
-  }
-  
-  .header .contacts,
-  .header .contacts a,
-  .header .auth-control a {
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 500;
-    color: #ffffff;
-  }
-  
-  .header .contacts:hover a,
-  .header .auth-control:hover a {
-    text-decoration: underline;
-  }
+.contacts {
+  margin: 2rem 1rem;
+}
+
+.contacts .ant-row .ant-col .ant-row:not(.phone) {
+  margin-bottom: 1rem;
+}
+
+.contacts .contacts-icon {
+  color: #FFAA66;
+  margin-right: 1rem;
+}
+
+.contacts .phone,
+.contacts .email a,
+.contacts .social-networks a {
+  font-size: 1rem;
+  color: #111111;
+}
+
+.contacts .email:hover a,
+.contacts .social-networks:hover a {
+  text-decoration: underline;
+}
+
+.contacts h2 {
+  font-weight: 600;
+}
+
+.contacts .ant-btn.contacts-submit-btn {
+  margin-top: 1rem;
+  min-width: 7rem;
+  min-height: 2.5rem;
+  background-color: #FFAA66;
+  color: #FFFFFF;
+  font-weight: 700;
+  border: none;
+  float: right;
+}
+
+.contacts .ant-btn.contacts-submit-btn:hover,
+.contacts .ant-btn.contacts-submit-btn:focus {
+  color: #FFAA66;
+  background-color: #FFFFFF;
+  border: 1px solid #FFAA66;
+}
+
+.contacts .contacts-text-area:hover,
+.contacts .contacts-input:hover{
+  border-color: #FFAA66;
+}
+
+.contacts .contacts-text-area:focus,
+.contacts .contacts-input:focus{
+  border-color: #FFAA66;
+  box-shadow: 0 0 0 2px rgba(255, 122, 51, 0.5);
+}

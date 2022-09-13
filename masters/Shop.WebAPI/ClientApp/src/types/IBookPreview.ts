@@ -3,5 +3,6 @@ export interface IBookPreview {
     title: string,
     price: number,
     imageUrl:string,    
-    author: string
+    author: string,
+    similarityRate?: number
 }
