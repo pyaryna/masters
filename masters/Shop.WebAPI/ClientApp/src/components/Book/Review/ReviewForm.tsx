@@ -1,6 +1,7 @@
 import { FC, memo, useCallback, useContext, useState } from "react";
-import { Button, Collapse, Form, Input, Rate } from "antd";
+import { Button, Collapse, Form, Input, notification, Rate } from "antd";
 
+import { IError } from "../../../types/IError";
 import { addReview } from "../../../api/RateApi";
 import { IAddReview } from "../../../types/IAddReview";
 import { UserContext } from "../../../contexts/UserContext";
@@ -17,6 +18,7 @@ interface IReviewFormProps {
 const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewFormProps) => {
     const [form] = Form.useForm();
     const [user] = useContext(UserContext);
+    const [open, setOpen] = useState<number[]>([-1]);
 
     const onFinish = useCallback(() => {
         form.validateFields().then((values: IAddReview) => {
@@ -31,9 +33,15 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                 addReview(itemToSend)
                     .then(() => {
                         onAddReview();
+                        form.resetFields();
+                        setOpen([]);
                     })
-                    .catch((e: Error) => {
+                    .catch((e: IError) => {
                         console.log(e);
+                        notification.open({
+                            message: 'Error adding new review',
+                            description: e.data
+                        });
                     });
             }
         });
@@ -45,6 +53,8 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
         <Collapse
             ghost
             className="review-form"
+            activeKey={open}
+            onChange={() => setOpen(prev => [1])}
         >
             <Panel
                 showArrow={false}

@@ -11,9 +11,10 @@ def get_collection(dataset):
     return list(cursor)
 
 def get_rates_for_previous_day():    
-    yesterday_datetime = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
-    yesterday = datetime.datetime(yesterday_datetime.year, yesterday_datetime.month, yesterday_datetime.day)
-    cursor = database.rates.find({'reviews.createdAt':{ '$eq': yesterday}})
+    # yesterday_datetime = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
+    # yesterday = datetime.datetime(yesterday_datetime.year, yesterday_datetime.month, yesterday_datetime.day)
+    # cursor = database.rates.find({'reviews.createdAt':{ '$eq': yesterday}})
+    cursor = database.rates.find({})
     return list(cursor)
 
 def get_random_record(collection):
@@ -22,9 +23,26 @@ def get_random_record(collection):
 
 def get_rates_by_users(users):
     cursor = database.rates.find({
-        'reviews.userId' : { '$in' : users}
+        'reviews.user._id' : { '$in' : users}
     })
     return list(cursor)    
+
+def get_books_by_ids(bookIds):
+    cursor = database.books.aggregate([
+        {
+            '$match' : {'_id' : { '$in' : bookIds }}
+        },
+        {
+            '$project': {
+                'id': '$_id',
+                'title': '$title',
+                'price': '$price',
+                'imageUrl': '$imageUrl',
+                'author': '$author.name'
+                }
+        }
+    ])
+    return list(cursor)
 
 def get_similarity_by_book(bookId):
     cursor = database.similarity.find({

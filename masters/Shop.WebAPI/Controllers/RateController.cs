@@ -34,7 +34,7 @@ namespace Shop.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
            
             return Ok();

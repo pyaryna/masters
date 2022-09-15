@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +29,7 @@ namespace Shop.WebAPI
             }));
 
             services.Configure<DbSettings>(Configuration.GetSection("DatabaseSettings"));
+            services.Configure<RecommendationUrls>(Configuration.GetSection("RecommendationUrls"));
 
             services.AddDataModule(Configuration);
             services.AddBusinessModule(Configuration);

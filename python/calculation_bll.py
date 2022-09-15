@@ -8,15 +8,14 @@ def calculate_similarity():
     yesterday_datetime = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
     yesterday = datetime.datetime(yesterday_datetime.year, yesterday_datetime.month, yesterday_datetime.day)
 
-    print(new_rates)
-
     for rate in new_rates: 
         for review in rate['reviews']:
-            if (review['createdAt'] == yesterday):
+            # if (review['createdAt'] == yesterday):
                 if (rate['bookId'] in requests.keys()):
-                    requests[rate['bookId']].append(review['userId'])
+                    requests[rate['bookId']].append(review['user']['_id'])
                 else:
-                    requests[rate['bookId']] = [review['userId']]   
+                    print(review['user']['_id'])
+                    requests[rate['bookId']] = [review['user']['_id']]   
 
     books_to_delete_similarities = [item['bookId'] for item in new_rates]
     delete_similarity_by_books(books_to_delete_similarities)
@@ -45,7 +44,7 @@ def calculate_similarity():
     return len(new_similaritites)
        
 
-def calculate_recomendations_by_book(book_id):    
+def calculate_recomendations_by_book(book_id, number):    
     book_similarities = get_similarity_by_book(book_id)
 
     similarities = []
@@ -54,16 +53,26 @@ def calculate_recomendations_by_book(book_id):
             
     similarities.sort()
     similarities.reverse()
-    return similarities
+    similarities = similarities[:number]
+    
+    bookIds_to_get = [item[1] for item in similarities]
+    books = get_books_by_ids(bookIds_to_get)
+
+    for book in books:
+        book['similarityRate'] = [x for (x, y) in similarities if y == book['id']][0]
+        book['id'] = str(book['id'])
+        del(book['_id'])
+
+    return books
 
 
-def calculate_recomendations_for_user(user_id):
+def calculate_recomendations_for_user(user_id, number):
     user_reviews = get_rates_by_users([user_id])
     changed_user_reviews = {}
 
     book_similatity = {}
-    similarities = []
     for review in user_reviews:
+        similarities = []
         changed_user_reviews.update(change_scheme_book_rate(review))
         similarity_dict = get_similarity_by_book(review['bookId'])
         for item in similarity_dict:
@@ -71,5 +80,14 @@ def calculate_recomendations_for_user(user_id):
             
         book_similatity.update({review['bookId'] : similarities})
 
-    recommended_items = get_recommended_items(changed_user_reviews, book_similatity)
-    return recommended_items
+    recommended_items = get_recommended_items(changed_user_reviews, book_similatity)[:number]
+    
+    bookIds_to_get = [item[1] for item in recommended_items]
+    books = get_books_by_ids(bookIds_to_get)
+
+    for book in books:
+        book['similarityRate'] = [x for (x, y) in recommended_items if y == book['id']][0]
+        book['id'] = str(book['id'])
+        del(book['_id'])
+
+    return books

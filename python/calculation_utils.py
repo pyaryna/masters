@@ -43,7 +43,7 @@ def koef_pearson(book1_reviews, book2):
 def change_scheme_user_rate(rate):
     new_reviews = {}
     for review in rate['reviews']:
-        new_reviews[review['userId']] = review['rate']
+        new_reviews[review['user']['_id']] = review['rate']
 
     return new_reviews
 
