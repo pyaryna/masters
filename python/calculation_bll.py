@@ -29,7 +29,7 @@ def calculate_similarity():
 
         for other in books_to_compare:
             if other['bookId'] != book['bookId']:
-                if any(other['bookId'] in item.keys() and book['bookId'] in item.keys() for item in new_similaritites):
+                if any(other['bookId'] in item.values() and book['bookId'] in item.values() for item in new_similaritites):
                     continue
 
                 scope = koef_pearson(book_reviews, other)
@@ -46,6 +46,9 @@ def calculate_similarity():
 
 def calculate_recomendations_by_book(book_id, number):    
     book_similarities = get_similarity_by_book(book_id)
+
+    for item in book_similarities:
+        print(str(item["book1"]) +" - "+ str(item["book2"]))
 
     similarities = []
     for item in book_similarities:

@@ -1,9 +1,9 @@
 import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
 
 import Similar from "./Similar";
-import { getBooksPreview } from "../../../api/BookApi";
 import { IBookPreview } from "../../../types/IBookPreview";
 import { FilterContext } from "../../../contexts/FilterContext";
+import { getRecommendationsByBook } from "../../../api/StatisticalApi";
 
 import "./Similar.css";
 
@@ -12,19 +12,20 @@ interface ISimilarBlockProps {
 }
 
 const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProps) => {
-    const [books, setBooks] = useState<IBookPreview[]>();
+    const [statBooks, setStatBooks] = useState<IBookPreview[]>();
     const [queryParams] = useContext(FilterContext);
 
     const fetchBooks = useCallback(() => {
-        getBooksPreview(queryParams)
+        getRecommendationsByBook(bookId, 5)
             .then((response: { data: IBookPreview[] }) => {
-                setBooks(response.data);
+                let temp = response.data.sort((a,b) => (b.similarityRate || 0) - (a.similarityRate || 0));
+                setStatBooks(temp);
                 console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setBooks, queryParams]);
+    }, [setStatBooks, queryParams]);
 
     useEffect(() => {
         fetchBooks();
@@ -32,14 +33,27 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
 
     return (
         <div className="similar-block">
-            <h2>
-                Statistical recommendations
-            </h2>
-            <Similar books={books?.slice(0, 5) || []} />
-            <h2>
-                Other recommendations
-            </h2>
-            <Similar books={books?.slice(0, 5) || []} />
+            {
+                statBooks ?
+                    <>
+                        <h2>
+                            Statistical recommendations
+                        </h2>
+                        <Similar books={statBooks} />
+                    </>
+                    : <></>
+            }
+
+            {
+                statBooks ?
+                    <>
+                        <h2>
+                            Other recommendations
+                        </h2>
+                        <Similar books={statBooks} />
+                    </>
+                    : <></>
+            }
         </div>
     );
 });

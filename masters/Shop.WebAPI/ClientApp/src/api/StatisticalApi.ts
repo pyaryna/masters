@@ -1,14 +1,12 @@
-
-import { IRate } from "../types/IRate";
-import { IAddReview } from "../types/IAddReview";
 import instanceApi from "../utils/instanceApi";
+import { IBookPreview } from "../types/IBookPreview";
 
-const getRecommendationsByBook = async (id: string) => {
-    return await instanceApi.get<IRate>(`rate/${id}`);
+const getRecommendationsByBook = async (id: string, amount: number) => {
+    return await instanceApi.get<IBookPreview[]>(`statistical/book/${id}/${amount}`);
 };
 
-const getRecommendationsForUser = async (review: IAddReview): Promise<void> => {
-    return await instanceApi.post('/rate', review);
+const getRecommendationsForUser = async (id: string, amount: number) => {
+    return await instanceApi.get<IBookPreview[]>(`statistical/user/${id}/${amount}`);
 };
 
 export { getRecommendationsByBook, getRecommendationsForUser };
