@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 python/config.py
+python/collaborative filtering/config.py
+python/content based/config.py
