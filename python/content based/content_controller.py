@@ -19,33 +19,23 @@ connect_to_database(db)
 @api.route('/')
 class Home(Resource):
     def get(self):
-        return '''<h1>Recommendation system of books</h1>
-            <p>Item-based Collaborative filtration</p>'''
+        return '''<h1>Content-based recommendation system of books</h1>'''
 
 
-@api.route('/similarity')
-class BookSimilarity(Resource):
-    def get(self):
-        amount = calculate_similarity()
-        return jsonify({
-                'status': '200 OK',
-                'message':'Data is posted to MongoDB!',
-                'amount': amount
-            })
+@api.route('/book/<string:id>/<int:number>/<string:user_id>')
+@api.route('/book/<string:id>/<int:number>')
+class RecommendationByBook(Resource):
+    def get(self, id, number, user_id = None):
+        bookd_id = ObjectId(id) # 630602ac073e94de49556749
+        return calculate_recomendations_by_book(bookd_id, number, user_id)
 
 
 @api.route('/user/<string:id>/<int:number>')
 class RecommendationForUser(Resource):
     def get(self, id, number):
-        user_id = ObjectId(id) # 620bb9fef23b1bc78052c5db
+        user_id = ObjectId(id) # 620bb9fef23b1bc78052c5e6
         return calculate_recomendations_for_user(user_id, number)
 
-
-@api.route('/book/<string:id>/<int:number>')
-class RecommendationByBook(Resource):
-    def get(self, id, number):
-        bookd_id = ObjectId(id) # 630602ac073e94de4955674c
-        return calculate_recomendations_by_book(bookd_id, number)
 
 if __name__ == '__main__':
     app.run(debug = True)

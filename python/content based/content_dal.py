@@ -56,3 +56,36 @@ def get_books_by_ids(bookIds):
         }
     ])
     return list(cursor)
+
+def get_books_by_id(bookId):
+    cursor = database.books.aggregate([
+        {
+            '$match' : {'_id' : bookId }
+        },
+        {
+            '$project': {
+                'title': '$title',
+                'description': '$description',
+                'genres': '$genres.name',
+                'author': '$author.name'
+                }
+        }
+    ])
+    
+    return list(cursor)[0]
+
+def get_books_not_in_ids(bookIds):
+    cursor = database.books.aggregate([
+        {
+            '$match' : {'_id' : { '$nin' : bookIds }}
+        },
+        {
+            '$project': {
+                'title': '$title',
+                'description': '$description',
+                'genres': '$genres.name',
+                'author': '$author.name'
+                }
+        }
+    ])
+    return list(cursor)

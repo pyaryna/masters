@@ -2,8 +2,24 @@ import string
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
+
+from sklearn import preprocessing
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
+
+def initial_df_preprocess(dataframe):
+    dataframe.genres = [' '.join(map(str, l)) for l in dataframe.genres]
+
+    columns_to_join = ["title", "description", "genres"]
+    dataframe['full_desc'] = dataframe[columns_to_join].T.agg(' '.join)
+    dataframe.drop(columns_to_join, axis=1, inplace=True)
+
+    dataframe["full_desc"] = dataframe['full_desc'].apply(text_preprocess)
+    label_encoder = preprocessing.LabelEncoder()
+  
+    dataframe['author']= label_encoder.fit_transform(dataframe['author'])
+    return dataframe
+
 
 def text_preprocess(sample):
     # lower-casing
