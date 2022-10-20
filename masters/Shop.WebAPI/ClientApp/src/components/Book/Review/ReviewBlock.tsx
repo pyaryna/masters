@@ -1,4 +1,5 @@
 import { FC, memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Review from "./Review";
 import ReviewForm from "./ReviewForm";
@@ -14,6 +15,7 @@ interface IReviewBlockProps {
 
 const ReviewBlock: FC<IReviewBlockProps> = memo(({ bookId }: IReviewBlockProps) => {
     const [rate, setRate] = useState<IRate>();
+    const { t } = useTranslation();
 
     const fetchRate = useCallback(() => {
         getRateByBookId(bookId)
@@ -37,7 +39,7 @@ const ReviewBlock: FC<IReviewBlockProps> = memo(({ bookId }: IReviewBlockProps) 
     return (
         <div className="book-review-block">
             <h2>
-                Reviews
+                {t("book.reviews")}
             </h2>
             <ReviewForm 
             bookId={bookId}

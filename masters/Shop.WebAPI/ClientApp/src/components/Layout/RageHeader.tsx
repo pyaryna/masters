@@ -1,4 +1,5 @@
 import { FC, memo, useCallback, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Layout as AntLayout, Row, Col, Select } from "antd";
 
@@ -12,6 +13,7 @@ const { Header } = AntLayout;
 const { Option } = Select;
 
 const RageHeader: FC = memo(() => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState<IBaseUser[]>();
   const [currentUser, setCurrentUser] = useContext(UserContext);
 
@@ -50,17 +52,17 @@ const RageHeader: FC = memo(() => {
               White books
             </Link>
           </Col>
-          <Col span={5}
+          <Col span={6}
             className='user-select'
           >
             {currentUser ?
               <Row align="middle" gutter={16}>
-                <Col>
+                <Col span={9}>
                   <div className="user-label">
-                    User
+                    {t("user")}
                   </div>
                 </Col>
-                <Col>
+                <Col span={15}>
                   <Select
                     defaultValue={currentUser.id}
                     onChange={(value) => changeCurrentUser(value)}

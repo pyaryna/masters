@@ -2,6 +2,7 @@ import { FC, memo } from "react";
 import { Link } from "react-router-dom";
 import { Collapse } from "antd";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 import { IBook } from "../../../types/IBook";
 
@@ -14,17 +15,19 @@ interface IDetailsTableProps {
 }
 
 const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps) => {
+    const { t } = useTranslation();
+
     return (
         <div className="details-table">
             <Collapse
                 ghost
             >
-                <Panel header="Book details" key="1">
+                <Panel header={t("book.book-details")} key="1">
                     <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    Publisher
+                                    {t("publishing")}
                                 </td>
                                 <td>
                                     <div className="book-publisher">
@@ -36,7 +39,7 @@ const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps)
                             </tr>
                             <tr>
                                 <td>
-                                    Genres
+                                    {t("genres")}
                                 </td>
                                 <td>
                                     {book?.genres.map(g =>
@@ -51,7 +54,7 @@ const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps)
                             </tr>
                             <tr>
                                 <td>
-                                    Language
+                                    {t("book.language")}
                                 </td>
                                 <td>
                                     {book?.language}
@@ -59,7 +62,7 @@ const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps)
                             </tr>
                             <tr>
                                 <td>
-                                    Page count
+                                    {t("book.page-count")}
                                 </td>
                                 <td>
                                     {book?.pageCount}
@@ -75,7 +78,7 @@ const DetailsTable: FC<IDetailsTableProps> = memo(({ book }: IDetailsTableProps)
                             </tr>
                             <tr>
                                 <td>
-                                    Published date
+                                    {t("book.published-date")}
                                 </td>
                                 <td>
                                     {moment(book.publishedDate).format('DD/MM/YYYY')}

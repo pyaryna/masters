@@ -8,12 +8,11 @@
 }
 
 .nav-item .ant-btn {
-  min-width: 8rem;
+  min-width: 9rem;
   color: inherit;
   background-color: #fff3e0;
   height: 2.5rem;
   border: 0;
-  padding-top: 0;
   line-height: 20px;
   
   padding: 0 1rem;
@@ -35,4 +34,19 @@
   background-color: #ffffff;
   font-weight: 600;
   color: #111111;
+}
+
+.language-changer{
+  height: 2.5rem;
+  
+  /* padding: 0 1rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px; 
+  color: #111111; */
+}
+
+.language-changer .ant-select-selection-item{
+  min-width: 3.5rem;
 }

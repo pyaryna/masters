@@ -1,0 +1,39 @@
+{
+  "search": "Search",
+  "user": "User",
+  "publishing": "Publishing",
+  "genres": "Genres",
+  "navigation": {
+    "about": "About us",
+    "book-shop": "Book shop",
+    "collaborative": "Collaborative",
+    "content": "Content",
+    "contacts": "Contacts"
+  },
+  "filtration": {
+    "sort-by": "Sort by",
+    "author": "Author",
+    "price": "Price"
+  },
+  "book": {
+    "book-details": "Book details",
+    "language": "Language",
+    "page-count": "Page count",
+    "published-date": "Published date",
+    "more": "more",
+    "less": "less",
+    "card": "To card",
+    "reviews": "Reviews",
+    "add-review": "Add new review",
+    "collab-recom": "Collaborative filtration",
+    "content-recom": "Content-based recommendations",
+    "submit": "Submit"
+  },
+  "contact": {
+    "contact-us": "Contact us",
+    "name": "Name",
+    "message": "Message",
+    "write-us": "Write us",
+    "submit": "Submit"
+  }
+}

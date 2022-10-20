@@ -32,7 +32,7 @@
 }
 
 .user-select .ant-select {
-  min-width: 10rem;
+  min-width: 11.5rem;
 }
 
 .user-select .ant-select:not(.ant-select-disabled):hover .ant-select-selector {

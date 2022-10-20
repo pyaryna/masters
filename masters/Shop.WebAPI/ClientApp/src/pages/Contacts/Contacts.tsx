@@ -1,4 +1,5 @@
 import { FC, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Row, Col, Form, Input, Button } from "antd";
 
 import { PhoneOutlined, MailOutlined, FacebookFilled } from "@ant-design/icons";
@@ -7,6 +8,7 @@ import "./Contacts.css";
 
 const Contacts: FC = memo(() => {
     const [form] = Form.useForm();
+    const { t } = useTranslation();
 
     return (
         <div className="contacts">
@@ -23,7 +25,7 @@ const Contacts: FC = memo(() => {
                     </Row>
                     <Row align="middle" className="email">
                         <MailOutlined className="contacts-icon" />
-                        <a href="mailto:p.yaryna@gmail.com">Write us</a>
+                        <a href="mailto:p.yaryna@gmail.com">{t("contact.write-us")}</a>
                     </Row>
                     <Row align="middle" className="social-networks">
                         <FacebookFilled className="contacts-icon" />
@@ -37,7 +39,7 @@ const Contacts: FC = memo(() => {
                 </Col>
                 <Col span={8}>
                     <h2>
-                        Contact us
+                        {t("contact.contact-us")}
                     </h2>
                     <Form
                         form={form}
@@ -50,7 +52,7 @@ const Contacts: FC = memo(() => {
                             ]}
                         >
                             <Input
-                                placeholder="Name..."
+                                placeholder={`${t("contact.name")}...`}
                                 className="contacts-input"
                             />
                         </Form.Item>
@@ -72,7 +74,7 @@ const Contacts: FC = memo(() => {
                             ]}
                         >
                             <Input.TextArea
-                                placeholder="Message..."
+                                placeholder={`${t("contact.message")}...`}
                                 className="contacts-text-area"
                             />
                         </Form.Item>
@@ -82,7 +84,7 @@ const Contacts: FC = memo(() => {
                                 htmlType="submit"
                                 className="contacts-submit-btn"
                             >
-                                Submit
+                                {t("contact.submit")}
                             </Button>
                         </Form.Item>
                     </Form>

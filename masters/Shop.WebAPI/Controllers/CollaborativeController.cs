@@ -12,11 +12,11 @@ namespace Shop.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StatisticalController : Controller
+    public class CollaborativeController : Controller
     {
         private readonly HttpClient _client;
 
-        public StatisticalController(IOptions<RecommendationUrls> urls)
+        public CollaborativeController(IOptions<RecommendationUrls> urls)
         {
             _client = new HttpClient();
             _client.BaseAddress = new Uri(urls.Value.Statistical);

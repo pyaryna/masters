@@ -9,11 +9,11 @@ import { IBookPreview } from "../../types/IBookPreview";
 import { UserContext } from "../../contexts/UserContext";
 import { FilterContext } from "../../contexts/FilterContext";
 import { IBookQueryParams } from "../../types/IBookQueryParams";
-import { getRecommendationsForUser } from "../../api/StatisticalApi";
+import { getRecommendationsForUser } from "../../api/CollaborativeApi";
 
 import "./Home.css";
 
-const Statistical: FC = memo(() => {
+const Collaborative: FC = memo(() => {
     const [books, setBooks] = useState<IBookPreview[]>();
     const [queryParams, setQueryParams] = useContext(FilterContext);
     const [user] = useContext(UserContext);
@@ -55,4 +55,4 @@ const Statistical: FC = memo(() => {
     );
 });
 
-export default Statistical;
+export default Collaborative;

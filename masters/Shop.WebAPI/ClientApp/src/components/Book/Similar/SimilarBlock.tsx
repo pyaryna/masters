@@ -1,9 +1,10 @@
 import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import Similar from "./Similar";
 import { IBookPreview } from "../../../types/IBookPreview";
 import { FilterContext } from "../../../contexts/FilterContext";
-import { getRecommendationsByBook } from "../../../api/StatisticalApi";
+import { getRecommendationsByBook } from "../../../api/CollaborativeApi";
 
 import "./Similar.css";
 
@@ -14,11 +15,12 @@ interface ISimilarBlockProps {
 const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProps) => {
     const [statBooks, setStatBooks] = useState<IBookPreview[]>();
     const [queryParams] = useContext(FilterContext);
+    const { t } = useTranslation();
 
     const fetchBooks = useCallback(() => {
         getRecommendationsByBook(bookId, 5)
             .then((response: { data: IBookPreview[] }) => {
-                let temp = response.data.sort((a,b) => (b.similarityRate || 0) - (a.similarityRate || 0));
+                let temp = response.data.sort((a, b) => (b.similarityRate || 0) - (a.similarityRate || 0));
                 setStatBooks(temp);
                 console.log(response.data);
             })
@@ -37,7 +39,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
                 statBooks ?
                     <>
                         <h2>
-                            Statistical recommendations
+                            {t("book.collab-recom")}
                         </h2>
                         <Similar books={statBooks} />
                     </>
@@ -48,7 +50,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
                 statBooks ?
                     <>
                         <h2>
-                            Other recommendations
+                            {t("book.content-recom")}
                         </h2>
                         <Similar books={statBooks} />
                     </>

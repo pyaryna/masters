@@ -1,6 +1,7 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Col, Row, Image, Button, Divider } from "antd";
 
 import { IBook } from "../../types/IBook";
@@ -12,6 +13,7 @@ import DetailsTable from "../../components/Book/Details/DetailsTable";
 import "./BookDetails.css";
 
 const BookDetails: FC = memo(() => {
+    const { t } = useTranslation();
     const { id } = useParams<{ id: string }>();
     const [book, setBook] = useState<IBook>();
     const [shortDesc, setShortDesc] = useState(true);
@@ -34,7 +36,7 @@ const BookDetails: FC = memo(() => {
     return (
         book ?
             <div className="book-details">
-                <div>   
+                <div>
                     <Row gutter={16}>
                         <Col span={8} className="details-img">
                             <Image
@@ -62,7 +64,7 @@ const BookDetails: FC = memo(() => {
                                             type="text"
                                             onClick={() => setShortDesc(!shortDesc)}
                                         >
-                                            {shortDesc ? "more..." : "less"}
+                                            {shortDesc ? `${t("book.more")}...` : t("book.less")}
                                         </Button>
                                     </div>
                                 </div>
@@ -73,7 +75,7 @@ const BookDetails: FC = memo(() => {
                                     {book.price} USD
                                 </div>
                                 <Button className="details-buy-btn">
-                                    To card
+                                    {t("book.card")}
                                 </Button>
                             </div>
                         </Col>

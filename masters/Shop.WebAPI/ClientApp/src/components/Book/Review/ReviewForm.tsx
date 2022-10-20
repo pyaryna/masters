@@ -1,5 +1,6 @@
 import { FC, memo, useCallback, useContext, useState } from "react";
 import { Button, Collapse, Form, Input, notification, Rate } from "antd";
+import { useTranslation } from "react-i18next";
 
 import { IError } from "../../../types/IError";
 import { addReview } from "../../../api/RateApi";
@@ -16,6 +17,7 @@ interface IReviewFormProps {
 }
 
 const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewFormProps) => {
+    const { t } = useTranslation();
     const [form] = Form.useForm();
     const [user] = useContext(UserContext);
     const [open, setOpen] = useState<number[]>([-1]);
@@ -64,13 +66,13 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                         type="text"
                         className="add-review-btn"
                     >
-                        Add new review
+                        {t("book.add-review")}
                     </Button>
                 }
                 key="1"
             >
                 <h3>
-                    Add new review
+                    {t("book.add-review")}
                 </h3>
                 <Form
                     form={form}
@@ -108,7 +110,7 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                             htmlType="submit"
                             className="review-submit-btn"
                         >
-                            Submit
+                            {t("book.submit")}
                         </Button>
                     </Form.Item>
                 </Form>

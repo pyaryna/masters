@@ -1,0 +1,40 @@
+{
+  "search": "Пошук",
+  "submit": "Submit",
+  "user": "Користувач",
+  "publishing": "Видавництво",
+  "genres": "Жанри",
+  "navigation": {
+    "about": "Про нас",
+    "book-shop": "Книгарня",
+    "collaborative": "Колаборація",
+    "content": "Вміст",
+    "contacts": "Контакти"
+  },
+  "filtration": {
+    "sort-by": "Сортувати за",
+    "author": "Автор",
+    "price": "Ціна"
+  },
+  "book": {
+    "book-details": "Деталі книги",
+    "language": "Мова видання",
+    "page-count": "Кількість сторінок",
+    "published-date": "Дата видання",
+    "more": "детальніше",
+    "less": "згорнути",
+    "card": "У кошик",
+    "reviews": "Відгуки",
+    "add-review": "Додати відгук",
+    "collab-recom": "Колаборативна фільтрація",
+    "content-recom": "Рекомендації на основі вмісту",
+    "submit": "Додати"
+  },
+  "contact": {
+    "contact-us": "Зв'яжіться з нами",
+    "name": "Ім'я",
+    "message": "Повідомлення",
+    "write-us": "Напишіть нам",
+    "submit": "Надіслати"
+  }
+}

@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, memo, useCallback, useEffect, useState } from "react";
 import { Checkbox, Input } from "antd";
+import { useTranslation } from "react-i18next";
 
 import "./Filter.css"
 
@@ -10,6 +11,7 @@ interface IFeatureFilterProps {
 
 const FeatureFilter: FC<IFeatureFilterProps> = memo(({ features, onFilterChange }: IFeatureFilterProps) => {
     const [data, setData] = useState<{ id: string, name: string }[]>(features);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setData(features);
@@ -32,7 +34,7 @@ const FeatureFilter: FC<IFeatureFilterProps> = memo(({ features, onFilterChange 
     return (
         <div className="feature-filter">
             <Input
-                placeholder="Search..."
+                placeholder={`${t("search")}...`}
                 onChange={searchFeature}
             />
             <Checkbox.Group onChange={onChange}>
