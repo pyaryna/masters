@@ -2,6 +2,7 @@ import { FC } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
+import Content from "./pages/Home/Content";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Layout from "./components/Layout/Layout";
 import Contacts from "./pages/Contacts/Contacts";
@@ -22,9 +23,9 @@ const App: FC = () => (
           <FilterProvider>
             <Layout>
               <Switch>
-                {/* <PrivateRoute exact path="/measures" component={Measures} /> */}
                 <Route exact path="/about-us" component={AboutUs} />
                 <Route exact path="/collab-recom" component={Collaborative} />
+                <Route exact path="/content-recom" component={Content} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route path="/:id" component={BookDetails} />
                 <Route path="/" component={Home} />

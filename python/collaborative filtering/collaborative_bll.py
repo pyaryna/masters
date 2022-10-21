@@ -47,9 +47,6 @@ def calculate_similarity():
 def calculate_recomendations_by_book(book_id, number):    
     book_similarities = get_similarity_by_book(book_id)
 
-    for item in book_similarities:
-        print(str(item["book1"]) +" - "+ str(item["book2"]))
-
     similarities = []
     for item in book_similarities:
             similarities.append((item['similarity'], item['book1'] if item['book1'] != book_id else item['book2']))

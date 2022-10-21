@@ -38,7 +38,7 @@ def calculate_recomendations_by_book(book_id, number, user_id):
     books = get_books_by_ids(bookIds_to_get)
 
     for book in books:
-        book['similarityRate'] = result_df[result_df["id"] == book['id']]["similarity"].values[0]
+        book['similarityRate'] = round(result_df[result_df["id"] == book['id']]["similarity"].values[0], 4)
         book['id'] = str(book['id'])
         del(book['_id'])
 

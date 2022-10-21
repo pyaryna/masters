@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import Similar from "./Similar";
 import { IBookPreview } from "../../../types/IBookPreview";
 import { FilterContext } from "../../../contexts/FilterContext";
-import { getRecommendationsByBook } from "../../../api/CollaborativeApi";
+import { getContentRecomByBook } from "../../../api/ContentApi";
+import { getCollabRecomByBook } from "../../../api/CollaborativeApi";
 
 import "./Similar.css";
 
@@ -13,46 +14,60 @@ interface ISimilarBlockProps {
 }
 
 const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProps) => {
-    const [statBooks, setStatBooks] = useState<IBookPreview[]>();
+    const [collabBooks, setCollabBooks] = useState<IBookPreview[]>();
+    const [contentBooks, setContentBooks] = useState<IBookPreview[]>();
     const [queryParams] = useContext(FilterContext);
     const { t } = useTranslation();
 
-    const fetchBooks = useCallback(() => {
-        getRecommendationsByBook(bookId, 5)
+    const fetchCollabBooks = useCallback(() => {
+        getCollabRecomByBook(bookId, 5)
             .then((response: { data: IBookPreview[] }) => {
                 let temp = response.data.sort((a, b) => (b.similarityRate || 0) - (a.similarityRate || 0));
-                setStatBooks(temp);
+                setCollabBooks(temp);
                 console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setStatBooks, queryParams]);
+    }, [setCollabBooks, queryParams]);
+
+    const fetchContentBooks = useCallback(() => {
+        getContentRecomByBook(bookId, 5)
+            .then((response: { data: IBookPreview[] }) => {
+                let temp = response.data.sort((a, b) => (b.similarityRate || 0) - (a.similarityRate || 0));
+                setContentBooks(temp);
+                console.log(response.data);
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
+    }, [setContentBooks, queryParams]);
 
     useEffect(() => {
-        fetchBooks();
-    }, [fetchBooks]);
+        fetchCollabBooks();
+        fetchContentBooks();
+    }, [fetchCollabBooks, fetchContentBooks]);
 
     return (
         <div className="similar-block">
             {
-                statBooks ?
+                collabBooks ?
                     <>
                         <h2>
                             {t("book.collab-recom")}
                         </h2>
-                        <Similar books={statBooks} />
+                        <Similar books={collabBooks} />
                     </>
                     : <></>
             }
 
             {
-                statBooks ?
+                contentBooks ?
                     <>
                         <h2>
                             {t("book.content-recom")}
                         </h2>
-                        <Similar books={statBooks} />
+                        <Similar books={contentBooks} />
                     </>
                     : <></>
             }

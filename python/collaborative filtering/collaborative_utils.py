@@ -69,7 +69,7 @@ def get_recommended_items(rates, book_similatity):
             totalSim.setdefault(item2, 0)
             totalSim[item2] += similarity
 
-    rankings=[(round(score/totalSim[item], 3),item) for item,score in scores.items( )]
+    rankings=[(round(score/totalSim[item], 3),item) for item,score in scores.items() if totalSim[item] > 0]
     
     rankings.sort( )
     rankings.reverse( )
