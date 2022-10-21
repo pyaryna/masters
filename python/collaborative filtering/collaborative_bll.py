@@ -33,12 +33,14 @@ def calculate_similarity():
                     continue
 
                 scope = koef_pearson(book_reviews, other)
-                similarity = {
-                    'book1':book['bookId'],
-                    'book2':other['bookId'],
-                    'similarity':scope
-                    }
-                new_similaritites.append(similarity)
+
+                if scope > 0:
+                    similarity = {
+                        'book1':book['bookId'],
+                        'book2':other['bookId'],
+                        'similarity':scope
+                        }
+                    new_similaritites.append(similarity)
 
     insert_books_similarity(new_similaritites)
     return len(new_similaritites)
