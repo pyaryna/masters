@@ -2,8 +2,8 @@
 {
     public class RecommendationUrls
     {
-        public string Statistical { get; set; }
+        public string Collaborative { get; set; }
 
-        public string Other { get; set; }
+        public string Content { get; set; }
     }
 }

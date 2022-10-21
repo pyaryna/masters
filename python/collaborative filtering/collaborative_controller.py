@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from flask_restx import Api, Resource
 
 from config import *
-from calculation_bll import *
+from collaborative_bll import *
 
 app = Flask(__name__)
 api = Api(app)
@@ -44,8 +44,8 @@ class RecommendationForUser(Resource):
 @api.route('/book/<string:id>/<int:number>')
 class RecommendationByBook(Resource):
     def get(self, id, number):
-        bookd_id = ObjectId(id) # 630602ac073e94de4955674c
-        return calculate_recomendations_by_book(bookd_id, number)
+        book_id = ObjectId(id) # 630602ac073e94de4955674c
+        return calculate_recomendations_by_book(book_id, number)
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(port=5000, debug = True)

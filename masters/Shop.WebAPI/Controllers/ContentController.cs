@@ -12,14 +12,14 @@ namespace Shop.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CollaborativeController : Controller
+    public class ContentController : Controller
     {
         private readonly HttpClient _client;
 
-        public CollaborativeController(IOptions<RecommendationUrls> urls)
+        public ContentController(IOptions<RecommendationUrls> urls)
         {
             _client = new HttpClient();
-            _client.BaseAddress = new Uri(urls.Value.Collaborative);
+            _client.BaseAddress = new Uri(urls.Value.Content);
         }
 
         [HttpGet("user/{userId}/{number}")]
@@ -40,14 +40,15 @@ namespace Shop.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("book/{bookId}/{number}")]
-        public async Task<IActionResult> GetByBook([FromRoute] string bookId, [FromRoute] int number)
+        [HttpGet("book/{bookId}/{number}/{userId?}")]
+        public async Task<IActionResult> GetByBook([FromRoute] string bookId, [FromRoute] int number, [FromRoute] string userId = null)
         {
             List<SimilarBookPreviewDto> result;
 
             try
             {
-                string responseBody = await _client.GetStringAsync($"book/{bookId}/{number}");
+                var queryStr = userId != null ? $"book/{bookId}/{number}/{userId}" : $"book/{bookId}/{number}";
+                string responseBody = await _client.GetStringAsync(queryStr);
                 result = JsonConvert.DeserializeObject<List<SimilarBookPreviewDto>>(responseBody);
             }
             catch (HttpRequestException e)

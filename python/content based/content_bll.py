@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from content_dal import *
 from content_utils import *
 
-def calculate_recomendations_by_book(book_id, number, user_id = None):    
+def calculate_recomendations_by_book(book_id, number, user_id):    
     book = get_books_by_id(book_id)
 
     if (user_id != None):

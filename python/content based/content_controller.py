@@ -22,12 +22,13 @@ class Home(Resource):
         return '''<h1>Content-based recommendation system of books</h1>'''
 
 
-@api.route('/book/<string:id>/<int:number>/<string:user_id>')
+@api.route('/book/<string:id>/<int:number>/<string:user>')
 @api.route('/book/<string:id>/<int:number>')
 class RecommendationByBook(Resource):
-    def get(self, id, number, user_id = None):
-        bookd_id = ObjectId(id) # 630602ac073e94de49556749
-        return calculate_recomendations_by_book(bookd_id, number, user_id)
+    def get(self, id, number, user = None):
+        book_id = ObjectId(id) # 630602ac073e94de49556749
+        user_id = ObjectId(user) if user != None else None # 620bb9fef23b1bc78052c5e6
+        return calculate_recomendations_by_book(book_id, number, user_id)
 
 
 @api.route('/user/<string:id>/<int:number>')
@@ -38,4 +39,4 @@ class RecommendationForUser(Resource):
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(port=5001, debug = True)

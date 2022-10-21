@@ -1,5 +1,5 @@
-from calculation_dal import *
-from calculation_utils import *
+from collaborative_dal import *
+from collaborative_utils import *
 
 def calculate_similarity():
     new_rates = get_rates_for_previous_day()
