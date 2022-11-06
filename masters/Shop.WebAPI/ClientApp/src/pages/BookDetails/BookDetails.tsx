@@ -37,7 +37,7 @@ const BookDetails: FC = memo(() => {
         book ?
             <div className="book-details">
                 <div>
-                    <Row gutter={16}>
+                    <Row>
                         <Col span={8} className="details-img">
                             <Image
                                 src={book.imageUrl}

@@ -47,16 +47,16 @@ def get_books_by_ids(bookIds):
 def get_similarity_by_book(bookId):
     cursor = database.similarity.find({
         '$or': [
-            {'book1' : bookId},
-            {'book2' : bookId}
+            {'book1Id' : bookId},
+            {'book2Id' : bookId}
         ]})
     return list(cursor)
 
 def delete_similarity_by_books(bookIds):
     database.similarity.delete_many({
         '$or': [
-            {'book1' : { '$in' : bookIds}},
-            {'book2' : { '$in' : bookIds}}
+            {'book1Id' : { '$in' : bookIds}},
+            {'book2Id' : { '$in' : bookIds}}
         ]})
 
 def insert_books_similarity(similarity):

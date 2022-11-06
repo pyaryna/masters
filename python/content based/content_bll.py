@@ -9,7 +9,7 @@ from content_dal import *
 from content_utils import *
 
 def calculate_recomendations_by_book(book_id, number, user_id):    
-    book = get_books_by_id(book_id)
+    book = get_book_by_id(book_id)
 
     if (user_id != None):
         user_rates = get_rates_by_user(user_id)
@@ -41,6 +41,8 @@ def calculate_recomendations_by_book(book_id, number, user_id):
         book['similarityRate'] = round(result_df[result_df["id"] == book['id']]["similarity"].values[0], 4)
         book['id'] = str(book['id'])
         del(book['_id'])
+
+    books = sorted(books, key=lambda d: d['similarityRate'], reverse=True)
 
     return books
 
@@ -86,5 +88,7 @@ def calculate_recomendations_for_user(user_id, number):
         book['similarityRate'] = recommended_items[recommended_items["id"] == book['id']]["expected_rate"].values[0]
         book['id'] = str(book['id'])
         del(book['_id'])
+
+    books = sorted(books, key=lambda d: d['similarityRate'], reverse=True)
 
     return books

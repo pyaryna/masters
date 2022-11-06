@@ -33,19 +33,17 @@ class BookSimilarity(Resource):
                 'amount': amount
             })
 
+@api.route('/book/<string:id>/<int:number>')
+class RecommendationByBook(Resource):
+    def get(self, id, number):
+        book_id = ObjectId(id) # 630602ac073e94de49556751
+        return calculate_recomendations_by_book(book_id, number)
 
 @api.route('/user/<string:id>/<int:number>')
 class RecommendationForUser(Resource):
     def get(self, id, number):
         user_id = ObjectId(id) # 620bb9fef23b1bc78052c5db
         return calculate_recomendations_for_user(user_id, number)
-
-
-@api.route('/book/<string:id>/<int:number>')
-class RecommendationByBook(Resource):
-    def get(self, id, number):
-        book_id = ObjectId(id) # 630602ac073e94de4955674c
-        return calculate_recomendations_by_book(book_id, number)
 
 if __name__ == '__main__':
     app.run(port=5000, debug = True)

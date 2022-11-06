@@ -36,8 +36,8 @@ def calculate_similarity():
 
                 if scope > 0:
                     similarity = {
-                        'book1':book['bookId'],
-                        'book2':other['bookId'],
+                        'book1Id':book['bookId'],
+                        'book2Id':other['bookId'],
                         'similarity':scope
                         }
                     new_similaritites.append(similarity)
@@ -51,7 +51,7 @@ def calculate_recomendations_by_book(book_id, number):
 
     similarities = []
     for item in book_similarities:
-            similarities.append((item['similarity'], item['book1'] if item['book1'] != book_id else item['book2']))
+            similarities.append((item['similarity'], item['book1Id'] if item['book1Id'] != book_id else item['book2Id']))
             
     similarities.sort()
     similarities.reverse()
@@ -64,6 +64,8 @@ def calculate_recomendations_by_book(book_id, number):
         book['similarityRate'] = [x for (x, y) in similarities if y == book['id']][0]
         book['id'] = str(book['id'])
         del(book['_id'])
+
+    books = sorted(books, key=lambda d: d['similarityRate'], reverse=True) 
 
     return books
 
@@ -78,7 +80,7 @@ def calculate_recomendations_for_user(user_id, number):
         changed_user_reviews.update(change_scheme_book_rate(review))
         similarity_dict = get_similarity_by_book(review['bookId'])
         for item in similarity_dict:
-            similarities.append((item['similarity'], item['book1'] if item['book1'] != review['bookId'] else item['book2']))
+            similarities.append((item['similarity'], item['book1Id'] if item['book1Id'] != review['bookId'] else item['book2Id']))
             
         book_similatity.update({review['bookId'] : similarities})
 
@@ -91,5 +93,7 @@ def calculate_recomendations_for_user(user_id, number):
         book['similarityRate'] = [x for (x, y) in recommended_items if y == book['id']][0]
         book['id'] = str(book['id'])
         del(book['_id'])
+
+    books = sorted(books, key=lambda d: d['similarityRate'], reverse=True) 
 
     return books

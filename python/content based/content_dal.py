@@ -57,7 +57,7 @@ def get_books_by_ids(bookIds):
     ])
     return list(cursor)
 
-def get_books_by_id(bookId):
+def get_book_by_id(bookId):
     cursor = database.books.aggregate([
         {
             '$match' : {'_id' : bookId }
