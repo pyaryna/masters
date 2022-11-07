@@ -13,7 +13,11 @@
   "filtration": {
     "sort-by": "Sort by",
     "author": "Author",
-    "price": "Price"
+    "price": "Price",
+    "sort-option":{
+      "price-up":"price up",
+      "price-down":"price down"
+    }
   },
   "book": {
     "book-details": "Book details",

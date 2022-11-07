@@ -14,7 +14,11 @@
   "filtration": {
     "sort-by": "Сортувати за",
     "author": "Автор",
-    "price": "Ціна"
+    "price": "Ціна",
+    "sort-option":{
+      "price-up":"найнижчою ціною",
+      "price-down":"найвищою ціною"
+    }
   },
   "book": {
     "book-details": "Деталі книги",
