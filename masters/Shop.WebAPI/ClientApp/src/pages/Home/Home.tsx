@@ -1,5 +1,6 @@
-import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
+import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Col, Row } from "antd";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 import Filter from "../../components/Filter/Filter";
 import Sorter from "../../components/Filter/Sorter";
@@ -7,19 +8,28 @@ import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
 import { getBooksPreview } from "../../api/BookApi";
 import { IBookPreview } from "../../types/IBookPreview";
-import { FilterContext } from "../../contexts/FilterContext";
-import { IBookQueryParams } from "../../types/IBookQueryParams";
+import { IBookPageInfo } from "../../types/IBookPageInfo";
+import { IBookPreviewPage } from "../../types/IBookPreviewPage";
+import { IBookQueryParams, IBookQueryParamsKeys } from "../../types/IBookQueryParams";
 
 import "./Home.css";
 
+const initialQueryParams = {
+  pageNumber: 1,
+  pageSize: 24
+}
+
 const Home: FC = memo(() => {
   const [books, setBooks] = useState<IBookPreview[]>();
-  const [queryParams, setQueryParams] = useContext(FilterContext);
+  const [pageInfo, setPageInfo] = useState<IBookPageInfo>();
+  const [queryParams, setQueryParams] = useState<IBookQueryParams>(initialQueryParams);
 
   const fetchBooks = useCallback(() => {
+    console.log(queryParams);
     getBooksPreview(queryParams)
-      .then((response: { data: IBookPreview[] }) => {
-        setBooks(response.data);
+      .then((response: { data: IBookPreviewPage }) => {
+        setBooks(response.data.books);
+        setPageInfo(response.data.pageInfo);
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -31,19 +41,62 @@ const Home: FC = memo(() => {
     fetchBooks();
   }, [fetchBooks]);
 
-  const onFilterChange = useCallback((newQueryParams: IBookQueryParams) => {
-    setQueryParams(newQueryParams);
-  }, [setQueryParams])
+  const onFilterChange = useCallback((name: IBookQueryParamsKeys, checkedValues: CheckboxValueType[]) => {
+    setQueryParams((prevQueryParams: IBookQueryParams) => {
+      let newQueryParams = { ...prevQueryParams };
+      if (name === "price" as IBookQueryParamsKeys) {
+        newQueryParams.priceStart = checkedValues[0] as number;
+        newQueryParams.priceEnd = checkedValues[1] as number;
+      }
+      else {
+        newQueryParams[name] = checkedValues as string[];
+      }
+      return newQueryParams;
+    });
+  }, []);
+
+  const onSorterOrSearchChange = useCallback((name: string, newValue: string) => {
+    setQueryParams((prevQueryParams: IBookQueryParams) => {
+      let newQueryParams = { ...prevQueryParams };
+      if (name === "sort") {
+        newQueryParams.orderByDesc = newValue === "down";
+      }
+      else {
+        newQueryParams[name] = newValue;
+      }
+      return newQueryParams;
+    });
+  }, []);
+
+  const onPaginatonChange = useCallback((page: number, pageSize: number) => {
+    setQueryParams((prevQueryParams: IBookQueryParams) => {
+      let newQueryParams = { ...prevQueryParams, pageSize: pageSize, pageNumber: page};
+      return newQueryParams;
+    });
+  }, []);
 
   return (
     <div className="home">
-      <Sorter onSorterChange={onFilterChange} />
+      <Sorter
+        queryParams={queryParams}
+        onSorterOrSearchChange={onSorterOrSearchChange}
+      />
       <Row className="home-books">
         <Col span={6}>
-          <Filter onFilterChange={onFilterChange} />
+          <Filter
+            queryParams={queryParams}
+            onFilterChange={onFilterChange}
+            minPrice={pageInfo?.minBookPrice || 0}
+            maxPrice={pageInfo?.maxBookPrice || 0}
+          />
         </Col>
         <Col span={18}>
-          <BookCardGrid books={books || []} />
+          <BookCardGrid
+            books={books || []}
+            queryParams={queryParams}
+            totalBooksNumber={pageInfo?.totalBookNumber || 0}
+            onPaginatonChange={onPaginatonChange}
+          />
         </Col>
       </Row>
     </div>

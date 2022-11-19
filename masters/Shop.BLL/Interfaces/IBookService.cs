@@ -8,7 +8,7 @@ namespace Shop.BLL.Interfaces
     {
         Task<IEnumerable<BookDto>> GetAllBooks();
 
-        Task<IEnumerable<BookPreviewDto>> GetAllBooksPreviews();
+        Task<BookPreviewPageDto> GetBooksPreviews(BookFilterDto filter);
 
         Task<BookDto> GetBookById(string id);
     }

@@ -7,7 +7,6 @@ import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
 import { IBookPreview } from "../../types/IBookPreview";
 import { UserContext } from "../../contexts/UserContext";
-import { FilterContext } from "../../contexts/FilterContext";
 import { getContentRecomForUser } from "../../api/ContentApi";
 import { IBookQueryParams } from "../../types/IBookQueryParams";
 
@@ -15,7 +14,7 @@ import "./Home.css";
 
 const Content: FC = memo(() => {
     const [books, setBooks] = useState<IBookPreview[]>();
-    const [queryParams, setQueryParams] = useContext(FilterContext);
+    const [queryParams, setQueryParams] = useState<IBookQueryParams>();
     const [user] = useContext(UserContext);
 
     const fetchBooks = useCallback(() => {
@@ -42,13 +41,13 @@ const Content: FC = memo(() => {
 
     return (
         <div className="home">
-            <Sorter onSorterChange={onFilterChange} />
+            {/* <Sorter onSorterChange={onFilterChange} /> */}
             <Row className="home-books">
                 <Col span={6}>
-                    <Filter onFilterChange={onFilterChange} />
+                    {/* <Filter onFilterChange={onFilterChange} /> */}
                 </Col>
                 <Col span={18}>
-                    <BookCardGrid books={books || []} />
+                    {/* <BookCardGrid books={books || []} /> */}
                 </Col>
             </Row>
         </div>

@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
 using Shop.BLL.DTOs;
 using Shop.DAL.Entities;
+using Shop.DAL.Models;
+using System.Linq;
 
 namespace Shop.BLL.MappingProfiles
 {
@@ -31,6 +34,16 @@ namespace Shop.BLL.MappingProfiles
                 .ForMember(ad => ad.Id, opt => opt.MapFrom(a => a.Id.ToString()));
 
             CreateMap<AddReviewDto, Review>();
+
+            CreateMap<BookFilterDto, BookFilterModel>()
+                .ForMember(m => m.AuthorIds, 
+                    opt => opt.MapFrom(dt => dt.AuthorIds.Select(a => ObjectId.Parse(a))))
+                .ForMember(m => m.PublisherIds,
+                    opt => opt.MapFrom(dt => dt.PublisherIds.Select(a => ObjectId.Parse(a))))
+                .ForMember(m => m.GenreIds,
+                    opt => opt.MapFrom(dt => dt.GenreIds.Select(a => ObjectId.Parse(a))));
+
+            CreateMap<BookPageInfoModel, BookPageInfoDto>();
         }
     }
 }

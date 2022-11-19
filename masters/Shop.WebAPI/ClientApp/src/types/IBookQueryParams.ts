@@ -1,14 +1,14 @@
-import { BooksSortingOption } from './BooksSortingOption';
-
 export interface IBookQueryParams{
-    authors?: string[],
-    publishers?: string[],
-    genres?: string[],
-    priceStartFilter?: number,
-    priceEndFilter?: number,
+    authorIds?: string[],
+    publisherIds?: string[],
+    genreIds?: string[],
+    priceStart?: number,
+    priceEnd?: number,
     searchValue?: string,
-    sortBy: BooksSortingOption,
     orderByDesc?: boolean,
     pageSize?: number,
-    pageNumber?: number
+    pageNumber?: number,
+    [key: string]: any
 }
+
+export type IBookQueryParamsKeys = keyof IBookQueryParams;

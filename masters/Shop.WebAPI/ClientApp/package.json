@@ -15,6 +15,7 @@
     "axios": "^0.23.0",
     "i18next": "^22.0.1",
     "moment": "^2.29.1",
+    "qs": "^6.11.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
@@ -52,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/react-router": "^5.1.17",
     "@types/react-router-dom": "^5.3.1"
   }

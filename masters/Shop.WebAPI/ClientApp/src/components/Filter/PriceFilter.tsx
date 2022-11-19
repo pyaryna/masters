@@ -1,24 +1,21 @@
-import { FC, memo, useCallback, useEffect, useState } from "react";
+import { FC, memo, useCallback } from "react";
 import { Col, InputNumber, Row, Slider } from "antd";
+
+import { FilterChangeFunction } from "../../types/FilterChangeFunction";
 
 import "./Filter.css"
 
 interface IPriceFilterProps {
-    onFilterChange: Function,
+    onFilterChange: FilterChangeFunction,
     minPrice: number,
-    maxPrice: number
+    maxPrice: number,
+    currentValue: [number, number]
 }
 
-const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, maxPrice }: IPriceFilterProps) => {
-    const [price, setPrice] = useState<[number, number]>([minPrice, maxPrice]);
-
+const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, maxPrice, currentValue }: IPriceFilterProps) => {
     const onChange = useCallback((newValue: [number, number]) => {
-        setPrice(newValue);
+        onFilterChange("price", newValue);
     }, []);
-
-    useEffect(()=>{
-        setPrice([minPrice, maxPrice]);
-    }, [minPrice, maxPrice])
 
     return (
         <div className="price-slider">
@@ -27,9 +24,9 @@ const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, max
                     <InputNumber
                         min={minPrice}
                         max={maxPrice}
-                        value={price[0]}
+                        value={currentValue[0]}
                         controls={false}
-                        onChange={(value: number) => setPrice([value, price[1]])}
+                        onChange={(value: number) => onChange([value, currentValue[1]])}
                     />
                 </Col>
                 <Col>
@@ -39,16 +36,16 @@ const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, max
                     <InputNumber
                         min={minPrice}
                         max={maxPrice}
-                        value={price[1]}
+                        value={currentValue[1]}
                         controls={false}
-                        onChange={(value: number) => setPrice([price[0], value])}
+                        onChange={(value: number) => onChange([currentValue[0], value])}
                     />
                 </Col>
             </Row>
             <Slider
                     range
                     onChange={onChange}
-                    value={[price[0], price[1]]}
+                    value={[currentValue[0], currentValue[1]]}
                     trackStyle={[{backgroundColor:"#FFAA66"}]}
                     handleStyle={[{borderColor:"#FFAA66"}, {borderColor:"#FFAA66"}]}
                 />

@@ -20,7 +20,6 @@ const App: FC = () => (
     <BrowserRouter>
       <UserProvider>
         <MetadataProvider>
-          <FilterProvider>
             <Layout>
               <Switch>
                 <Route exact path="/about-us" component={AboutUs} />
@@ -31,7 +30,6 @@ const App: FC = () => (
                 <Route path="/" component={Home} />
               </Switch>
             </Layout>
-          </FilterProvider>
         </MetadataProvider>
       </UserProvider>
     </BrowserRouter>

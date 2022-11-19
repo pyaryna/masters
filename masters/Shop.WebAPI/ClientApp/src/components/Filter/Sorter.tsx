@@ -2,26 +2,27 @@ import { ChangeEvent, FC, memo, useCallback, useState } from "react";
 import { Col, Input, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
 
+import { IBookQueryParams } from "../../types/IBookQueryParams";
+
 import "./Filter.css"
 
 const { Option } = Select;
 
 interface ISorterProps {
-    onSorterChange: Function
+    queryParams: IBookQueryParams,
+    onSorterOrSearchChange: (name: string, newValue: string) => void
 }
 
-const Sorter: FC<ISorterProps> = memo(({ onSorterChange }: ISorterProps) => {
+const Sorter: FC<ISorterProps> = memo(({ queryParams, onSorterOrSearchChange }: ISorterProps) => {
     const { t } = useTranslation();
-    const [sortValue, setSortValue] = useState<string>();
 
     const handleChange = useCallback((value: string) => {
-        console.log(`selected ${value}`);
-        setSortValue(value);
-    }, [setSortValue]);
+        onSorterOrSearchChange("sort", value)
+    }, [onSorterOrSearchChange]);
 
     const searchBook = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-
-    }, []);
+        onSorterOrSearchChange("searchValue", event.target.value)
+    }, [onSorterOrSearchChange]);
 
     return (
         <Row align="middle" justify="end" className="book-sorter">
@@ -30,11 +31,11 @@ const Sorter: FC<ISorterProps> = memo(({ onSorterChange }: ISorterProps) => {
             </Col>
             <Col span={5}>
                 <Select
-                    value={sortValue}
+                    value={ queryParams.orderByDesc ? (queryParams.orderByDesc ? "down" : "up") : undefined }
                     onChange={handleChange}
                 >
-                    <Option value="priceDown">{t("filtration.sort-option.price-up")}</Option>
-                    <Option value="priceUp">{t("filtration.sort-option.price-down")}</Option>
+                    <Option value="up">{t("filtration.sort-option.price-up")}</Option>
+                    <Option value="down">{t("filtration.sort-option.price-down")}</Option>
                 </Select>
             </Col>
             <Col span={6}>

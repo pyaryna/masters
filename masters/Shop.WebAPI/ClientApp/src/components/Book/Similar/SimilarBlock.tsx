@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 import Similar from "./Similar";
 import { IBookPreview } from "../../../types/IBookPreview";
-import { FilterContext } from "../../../contexts/FilterContext";
 import { getContentRecomByBook } from "../../../api/ContentApi";
 import { getCollabRecomByBook } from "../../../api/CollaborativeApi";
 
@@ -16,7 +15,6 @@ interface ISimilarBlockProps {
 const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProps) => {
     const [collabBooks, setCollabBooks] = useState<IBookPreview[]>();
     const [contentBooks, setContentBooks] = useState<IBookPreview[]>();
-    const [queryParams] = useContext(FilterContext);
     const { t } = useTranslation();
 
     const fetchCollabBooks = useCallback(() => {
@@ -29,7 +27,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setCollabBooks, queryParams]);
+    }, [setCollabBooks]);
 
     const fetchContentBooks = useCallback(() => {
         getContentRecomByBook(bookId, 5)
@@ -41,7 +39,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setContentBooks, queryParams]);
+    }, [setContentBooks]);
 
     useEffect(() => {
         fetchCollabBooks();

@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
+using Shop.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shop.BLL.Services
@@ -30,11 +33,17 @@ namespace Shop.BLL.Services
             return _mapper.Map<IEnumerable<Book>, IEnumerable<BookDto>>(books);
         }
 
-        public async Task<IEnumerable<BookPreviewDto>> GetAllBooksPreviews()
+        public async Task<BookPreviewPageDto> GetBooksPreviews(BookFilterDto filter)
         {
-            var books = await _unitOfWork.BookRepository.GetAllBooksPreviews();
+            var filterModel = _mapper.Map<BookFilterDto, BookFilterModel>(filter);
+            var booksModel = await _unitOfWork.BookRepository.GetBooksPreviews(filterModel);
+            var pageInfo = await _unitOfWork.BookRepository.GetBooksPageMetadata(filterModel);
 
-            return _mapper.Map<IEnumerable<Book>, IEnumerable<BookPreviewDto>>(books);
+            return new BookPreviewPageDto
+            {
+                Books = _mapper.Map<IEnumerable<Book>, IEnumerable<BookPreviewDto>>(booksModel),
+                PageInfo = _mapper.Map<BookPageInfoModel, BookPageInfoDto>(pageInfo)
+            };
         }
 
         public async Task<BookDto> GetBookById(string strId)

@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using Shop.DAL.Entities;
+using Shop.DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,7 +10,9 @@ namespace Shop.DAL.Interfaces
     {
         Task<IEnumerable<Book>> GetAllBooks();
 
-        Task<IEnumerable<Book>> GetAllBooksPreviews();
+        Task<IEnumerable<Book>> GetBooksPreviews(BookFilterModel filter);
+
+        Task<BookPageInfoModel> GetBooksPageMetadata(BookFilterModel filter);
 
         Task<Book> GetBookById(ObjectId id);
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
 using System.Threading.Tasks;
 
@@ -24,9 +25,9 @@ namespace Shop.WebAPI.Controllers
         }
 
         [HttpGet("previews")]
-        public async Task<IActionResult> GetAllBooksPreview()
+        public async Task<IActionResult> GetBooksPreview([FromQuery] BookFilterDto filter)
         {
-            var result = await _bookService.GetAllBooksPreviews();
+            var result = await _bookService.GetBooksPreviews(filter);
 
             return Json(result);
         }
