@@ -44,6 +44,9 @@ namespace Shop.BLL.MappingProfiles
                     opt => opt.MapFrom(dt => dt.GenreIds.Select(a => ObjectId.Parse(a))));
 
             CreateMap<BookPageInfoModel, BookPageInfoDto>();
+
+            CreateMap<ReviewsQueryParamsDto, ReviewsQueryParamsModel>()
+                .ForMember(m => m.BookId, opt => opt.MapFrom(dt => ObjectId.Parse(dt.BookId)));
         }
     }
 }

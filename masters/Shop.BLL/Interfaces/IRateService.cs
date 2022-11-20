@@ -7,6 +7,8 @@ namespace Shop.BLL.Interfaces
     {
         Task<RateDto> GetRatesByBookId(string bookId);
 
+        Task<ReviewsPageDto> GetReviewsByBookId(ReviewsQueryParamsDto queryParams);
+
         Task AddReviewToBook(AddReviewDto review);
     }
 }

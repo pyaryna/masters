@@ -9,8 +9,8 @@ interface IBookCardGridProps {
   books: IBookPreview[];
   chunkSize?: number;
   queryParams: IBookQueryParams;
-  totalBooksNumber: number;
-  onPaginatonChange: (page: number, pageSize: number) => void;
+  totalBooksNumber?: number;
+  onPaginatonChange?: (page: number, pageSize: number) => void;
 }
 
 const BookCardGrid: FC<IBookCardGridProps> = memo(({ books, queryParams, totalBooksNumber, onPaginatonChange, chunkSize = 4 }: IBookCardGridProps) => {
@@ -27,8 +27,10 @@ const BookCardGrid: FC<IBookCardGridProps> = memo(({ books, queryParams, totalBo
   }, [books, chunkSize]);
 
   const handleChange = useCallback((page: number, pageSize: number) => {
-    onPaginatonChange(page, pageSize);
-  }, []);
+    if (onPaginatonChange) {
+      onPaginatonChange(page, pageSize);
+    }
+  }, [onPaginatonChange]);
 
   return (
     <div>
@@ -50,15 +52,19 @@ const BookCardGrid: FC<IBookCardGridProps> = memo(({ books, queryParams, totalBo
           }
         </Row>
       )}
-      <Row justify="center" className="book-pagination">
-        <Pagination
-          pageSizeOptions={[24, 48, 92]}
-          total={totalBooksNumber}
-          current={queryParams.pageNumber}
-          pageSize={queryParams.pageSize}
-          onChange={handleChange}
-        />
-      </Row>
+      {
+        onPaginatonChange ?
+          <Row justify="center" className="book-pagination">
+            <Pagination
+              pageSizeOptions={[24, 48, 92]}
+              total={totalBooksNumber}
+              current={queryParams.pageNumber}
+              pageSize={queryParams.pageSize}
+              onChange={handleChange}
+            />
+          </Row>
+          : <></>
+      }
     </div>
   );
 });

@@ -18,9 +18,17 @@ namespace Shop.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookById(string id)
+        public async Task<IActionResult> GetRateBookById(string id)
         {
             var result = await _rateService.GetRatesByBookId(id);
+
+            return Json(result);
+        }
+
+        [HttpGet("reviews")]
+        public async Task<IActionResult> GetREviewsBookById([FromQuery] ReviewsQueryParamsDto queryParams)
+        {
+            var result = await _rateService.GetReviewsByBookId(queryParams);
 
             return Json(result);
         }

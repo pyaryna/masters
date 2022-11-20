@@ -1,5 +1,6 @@
 import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
 import { Col, Row } from "antd";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 import Filter from "../../components/Filter/Filter";
 import Sorter from "../../components/Filter/Sorter";
@@ -7,15 +8,14 @@ import BookCardGrid from "../../components/Book/Card/BookCardGrid";
 
 import { IBookPreview } from "../../types/IBookPreview";
 import { UserContext } from "../../contexts/UserContext";
-import { IBookQueryParams, IBookQueryParamsKeys } from "../../types/IBookQueryParams";
 import { getCollabRecomForUser } from "../../api/CollaborativeApi";
+import { IBookQueryParams, IBookQueryParamsKeys } from "../../types/IBookQueryParams";
 
 import "./Home.css";
-import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 const Collaborative: FC = memo(() => {
     const [books, setBooks] = useState<IBookPreview[]>();
-    const [queryParams, setQueryParams] = useState<IBookQueryParams>();
+    const [queryParams, setQueryParams] = useState<IBookQueryParams>({});
     const [user] = useContext(UserContext);
 
     const fetchBooks = useCallback(() => {
@@ -64,30 +64,30 @@ const Collaborative: FC = memo(() => {
     }, []);
 
     return (
-        <div className="home">
-            {/* <Sorter
-                queryParams={queryParams}
-                onSorterOrSearchChange={onSorterOrSearchChange}
-            /> */}
-            <Row className="home-books">
-                <Col span={6}>
-                    {/* <Filter
-                        queryParams={queryParams}
-                        onFilterChange={onFilterChange}
-                        minPrice={pageInfo?.minBookPrice || 0}
-                        maxPrice={pageInfo?.maxBookPrice || 0}
-                    /> */}
-                </Col>
-                <Col span={18}>
-                    {/* <BookCardGrid
-                        books={books || []}
-                        queryParams={queryParams}
-                        totalBooksNumber={pageInfo?.totalBookNumber || 0}
-                        onPaginatonChange={onPaginatonChange}
-                    /> */}
-                </Col>
-            </Row>
-        </div>
+        books ?
+            <div className="home">
+                < Sorter
+                    queryParams={queryParams}
+                    onSorterOrSearchChange={onSorterOrSearchChange}
+                />
+                <Row className="home-books">
+                    <Col span={6}>
+                        <Filter
+                            queryParams={queryParams}
+                            onFilterChange={onFilterChange}
+                            minPrice={Math.min(...books?.map(b => b.price)) || 0}
+                            maxPrice={Math.max(...books?.map(b => b.price)) || 0}
+                        />
+                    </Col>
+                    <Col span={18}>
+                        <BookCardGrid
+                            books={books || []}
+                            queryParams={queryParams}
+                        />
+                    </Col>
+                </Row>
+            </div >
+            : <></>
     );
 });
 

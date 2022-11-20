@@ -44,7 +44,8 @@ namespace Shop.DAL.Repository
             return await queryResult
                 .Skip((filter.PageNumber - 1) * filter.PageSize)
                 .Limit(filter.PageSize)
-                .Project<Book>(Builders<Book>.Projection.Include(b => b.Id)
+                .Project<Book>(Builders<Book>.Projection
+                    .Include(b => b.Id)
                     .Include(b => b.Title)
                     .Include(b => b.Author)
                     .Include(b => b.Price)
