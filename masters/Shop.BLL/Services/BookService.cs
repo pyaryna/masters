@@ -42,7 +42,7 @@ namespace Shop.BLL.Services
             return new BookPreviewPageDto
             {
                 Books = _mapper.Map<IEnumerable<Book>, IEnumerable<BookPreviewDto>>(booksModel),
-                PageInfo = _mapper.Map<BookPageInfoModel, BookPageInfoDto>(pageInfo)
+                PageInfo = _mapper.Map<BooksMetadataModel, BookPageInfoDto>(pageInfo)
             };
         }
 

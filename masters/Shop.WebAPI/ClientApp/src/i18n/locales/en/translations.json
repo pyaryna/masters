@@ -3,6 +3,7 @@
   "user": "User",
   "publishing": "Publishing",
   "genres": "Genres",
+  "no-result": "There are no results for your request",
   "navigation": {
     "about": "About us",
     "book-shop": "Book shop",
@@ -17,7 +18,8 @@
     "sort-option":{
       "price-up":"price up",
       "price-down":"price down"
-    }
+    },
+    "apply":"Apply"
   },
   "book": {
     "book-details": "Book details",

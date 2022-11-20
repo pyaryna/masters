@@ -12,7 +12,9 @@ namespace Shop.DAL.Interfaces
 
         Task<IEnumerable<Book>> GetBooksPreviews(BookFilterModel filter);
 
-        Task<BookPageInfoModel> GetBooksPageMetadata(BookFilterModel filter);
+        Task<BooksMetadataModel> GetBooksPageMetadata(BookFilterModel filter);
+
+        Task<BooksMetadataModel> GetBooksMetadata();
 
         Task<Book> GetBookById(ObjectId id);
     }

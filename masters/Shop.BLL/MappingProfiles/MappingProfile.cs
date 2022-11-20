@@ -43,7 +43,7 @@ namespace Shop.BLL.MappingProfiles
                 .ForMember(m => m.GenreIds,
                     opt => opt.MapFrom(dt => dt.GenreIds.Select(a => ObjectId.Parse(a))));
 
-            CreateMap<BookPageInfoModel, BookPageInfoDto>();
+            CreateMap<BooksMetadataModel, BookPageInfoDto>();
         }
     }
 }

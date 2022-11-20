@@ -1,8 +1,8 @@
 ﻿namespace Shop.DAL.Models
 {
-    public class BookPageInfoModel
+    public class BooksMetadataModel
     {
-        public int TotalBookNumber { get; set; }
+        public int? TotalBookNumber { get; set; }
 
         public double MaxBookPrice { get; set; }
 

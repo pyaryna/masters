@@ -1,6 +1,5 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Col, Row, Spin } from "antd";
-import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 import Filter from "../../components/Filter/Filter";
 import Sorter from "../../components/Filter/Sorter";
@@ -10,7 +9,7 @@ import { getBooksPreview } from "../../api/BookApi";
 import { IBookPreview } from "../../types/IBookPreview";
 import { IBookPageInfo } from "../../types/IBookPageInfo";
 import { IBookPreviewPage } from "../../types/IBookPreviewPage";
-import { IBookQueryParams, IBookQueryParamsKeys } from "../../types/IBookQueryParams";
+import { IBookFilter, IBookQueryParams } from "../../types/IBookQueryParams";
 
 import "./Home.css";
 
@@ -37,25 +36,25 @@ const Home: FC = memo(() => {
       .catch((e: Error) => {
         console.log(e);
       });
-  }, [setBooks]);
+  }, [setBooks, queryParams]);
 
   useEffect(() => {
     fetchBooks();
   }, [fetchBooks]);
 
-  const onFilterChange = useCallback((name: IBookQueryParamsKeys, checkedValues: CheckboxValueType[]) => {
+  const onFilterSubmit = useCallback((filterValues: IBookFilter) => {
     setQueryParams((prevQueryParams: IBookQueryParams) => {
-      let newQueryParams = { ...prevQueryParams };
-      if (name === "price" as IBookQueryParamsKeys) {
-        newQueryParams.priceStart = checkedValues[0] as number;
-        newQueryParams.priceEnd = checkedValues[1] as number;
-      }
-      else {
-        newQueryParams[name] = checkedValues as string[];
-      }
+      let newQueryParams = {
+        ...prevQueryParams,
+        authorIds: filterValues?.authorIds,
+        publisherIds: filterValues?.publisherIds,
+        genreIds: filterValues?.genreIds,
+        priceStart: filterValues?.priceStart,
+        priceEnd: filterValues?.priceEnd
+      };
       return newQueryParams;
     });
-  }, []);
+  }, [setQueryParams]);
 
   const onSorterOrSearchChange = useCallback((name: string, newValue: string) => {
     setQueryParams((prevQueryParams: IBookQueryParams) => {
@@ -68,14 +67,14 @@ const Home: FC = memo(() => {
       }
       return newQueryParams;
     });
-  }, []);
+  }, [setQueryParams]);
 
   const onPaginatonChange = useCallback((page: number, pageSize: number) => {
     setQueryParams((prevQueryParams: IBookQueryParams) => {
       let newQueryParams = { ...prevQueryParams, pageSize: pageSize, pageNumber: page };
       return newQueryParams;
     });
-  }, []);
+  }, [setQueryParams]);
 
   return (
     <div className="home">
@@ -87,15 +86,15 @@ const Home: FC = memo(() => {
         <Col span={6}>
           <Filter
             queryParams={queryParams}
-            onFilterChange={onFilterChange}
-            minPrice={pageInfo?.minBookPrice || 0}
-            maxPrice={pageInfo?.maxBookPrice || 0}
+            onFilterSubmit={onFilterSubmit}
+            minCurrentPrice={pageInfo?.minBookPrice || 0}
+            maxCurrentPrice={pageInfo?.maxBookPrice || 0}
           />
         </Col>
         <Col span={18}>
           {loading ?
             <Row justify="center">
-              <Spin size="large"/>
+              <Spin size="large" />
             </Row>
             : <BookCardGrid
               books={books || []}

@@ -32,11 +32,15 @@ namespace Shop.BLL.Services
             var genres = _mapper.Map<IEnumerable<Genre>, IEnumerable<GenreDto>>(
                 await _unitOfWork.GenreRepository.GetAllGenres());
 
+            var info = await _unitOfWork.BookRepository.GetBooksMetadata();
+
             var result = new BookMetadataDto
             {
                 Authors = authors,
                 Publishers = publishers,
-                Genres = genres
+                Genres = genres,
+                MaxBookPrice = info.MaxBookPrice,
+                MinBookPrice = info.MinBookPrice
             };
 
             return result;

@@ -7,12 +7,12 @@ import "./Filter.css"
 
 interface IPriceFilterProps {
     onFilterChange: FilterChangeFunction,
-    minPrice: number,
-    maxPrice: number,
+    minPossiblePrice: number,
+    maxPossiblePrice: number,
     currentValue: [number, number]
 }
 
-const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, maxPrice, currentValue }: IPriceFilterProps) => {
+const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPossiblePrice, maxPossiblePrice, currentValue }: IPriceFilterProps) => {
     const onChange = useCallback((newValue: [number, number]) => {
         onFilterChange("price", newValue);
     }, [onFilterChange]);
@@ -22,35 +22,35 @@ const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, max
             <Row align="middle" justify="space-around">
                 <Col span={10}>
                     <InputNumber
-                        min={minPrice}
-                        max={maxPrice}
+                        min={minPossiblePrice}
+                        max={maxPossiblePrice}
                         value={currentValue[0]}
                         controls={false}
-                        onChange={(value: number) => onChange([value, currentValue[1]])}
+                        onChange={(value: number | null) => onChange([value || 0, currentValue[1]])}
                     />
                 </Col>
                 <Col>
-                -
+                    -
                 </Col>
                 <Col span={10}>
                     <InputNumber
-                        min={minPrice}
-                        max={maxPrice}
+                        min={minPossiblePrice}
+                        max={maxPossiblePrice}
                         value={currentValue[1]}
                         controls={false}
-                        onChange={(value: number) => onChange([currentValue[0], value])}
+                        onChange={(value: number | null) => onChange([currentValue[0], value || 0])}
                     />
                 </Col>
             </Row>
             <Slider
-                    range
-                    onChange={onChange}
-                    min={minPrice}
-                    max={maxPrice + 1}
-                    value={[currentValue[0], currentValue[1]]}
-                    trackStyle={[{backgroundColor:"#FFAA66"}]}
-                    handleStyle={[{borderColor:"#FFAA66"}, {borderColor:"#FFAA66"}]}
-                />
+                range
+                onChange={onChange}
+                min={minPossiblePrice}
+                max={maxPossiblePrice}
+                value={[currentValue[0], currentValue[1]]}
+                trackStyle={[{ backgroundColor: "#FFAA66" }]}
+                handleStyle={[{ borderColor: "#FFAA66" }, { borderColor: "#FFAA66" }]}
+            />
         </div>
     );
 });

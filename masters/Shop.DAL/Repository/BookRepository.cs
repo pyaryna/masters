@@ -53,15 +53,29 @@ namespace Shop.DAL.Repository
                 .ToListAsync();
         }
 
-        public async Task<BookPageInfoModel> GetBooksPageMetadata(BookFilterModel filter)
+        public async Task<BooksMetadataModel> GetBooksPageMetadata(BookFilterModel filter)
         {
             var query = BuildQueryByFilter(filter);
 
             var queryResult = _shopDBContext.Books.Find(query);
 
-            return new BookPageInfoModel
+            var max = await queryResult.SortByDescending(b => b.Price).FirstOrDefaultAsync();
+            var min = await queryResult.SortBy(b => b.Price).FirstOrDefaultAsync();
+
+            return new BooksMetadataModel
             {
                 TotalBookNumber = (int)await queryResult.CountDocumentsAsync(),
+                MaxBookPrice = max != null ? max.Price : 0,
+                MinBookPrice = min != null ? min.Price : 0
+            };
+        }
+
+        public async Task<BooksMetadataModel> GetBooksMetadata()
+        {
+            var queryResult = _shopDBContext.Books.Find(_ => true);
+
+            return new BooksMetadataModel
+            {
                 MaxBookPrice = (await queryResult.SortByDescending(b => b.Price).FirstOrDefaultAsync()).Price,
                 MinBookPrice = (await queryResult.SortBy(b => b.Price).FirstOrDefaultAsync()).Price
             };

@@ -5,5 +5,7 @@ import { IPublisher } from "./IPublisher";
 export interface IMetadata {
     authors: IAuthor[],
     publishers: IPublisher[],
-    genres: IGenre[]
+    genres: IGenre[],
+    maxBookPrice: number,
+    minBookPrice: number
 }

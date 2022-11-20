@@ -1,14 +1,15 @@
-export interface IBookQueryParams{
+export interface IBookFilter{
     authorIds?: string[],
     publisherIds?: string[],
     genreIds?: string[],
     priceStart?: number,
     priceEnd?: number,
-    searchValue?: string,
-    orderByDesc?: boolean,
-    pageSize?: number,
-    pageNumber?: number,
     [key: string]: any
 }
 
-export type IBookQueryParamsKeys = keyof IBookQueryParams;
+export interface IBookQueryParams extends IBookFilter{
+    searchValue?: string,
+    orderByDesc?: boolean,
+    pageSize?: number,
+    pageNumber?: number
+}

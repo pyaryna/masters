@@ -3,6 +3,23 @@
     padding-right: 4rem;
 }
 
+.ant-btn.apply-btn{
+    margin-top: 1rem;
+    min-width: 7rem;
+    min-height: 2.5rem;
+    background-color: #FFAA66;    
+    color: #FFFFFF;
+    font-weight: 700;
+    border: none;
+}
+
+.ant-btn.apply-btn:hover,
+.ant-btn.apply-btn:focus{
+    color: #FFAA66;    
+    background-color: #FFFFFF;
+    border: 1px solid #FFAA66;
+}
+
 .book-sorter {
     padding: 0 2rem;
 }
@@ -32,6 +49,10 @@
 
 .book-sorter .ant-select-arrow {
     color: #FFAA66;
+}
+
+.book-sort-select .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+    background-color: #fff3e0;
 }
 
 .feature-filter .ant-checkbox:hover .ant-checkbox-inner,

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, KeyboardEventHandler, memo, useCallback, useState } from "react";
+import { FC, memo, useCallback } from "react";
 import { Col, Input, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
 
@@ -20,9 +20,8 @@ const Sorter: FC<ISorterProps> = memo(({ queryParams, onSorterOrSearchChange }: 
         onSorterOrSearchChange("sort", value)
     }, [onSorterOrSearchChange]);
 
-    const searchBook = useCallback((event: any) => {
-        console.log(event);
-        // onSorterOrSearchChange("searchValue", event.target.value)
+    const searchBook = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+        onSorterOrSearchChange("searchValue", (event.target as HTMLInputElement).value)
     }, [onSorterOrSearchChange]);
 
     return (
@@ -32,7 +31,8 @@ const Sorter: FC<ISorterProps> = memo(({ queryParams, onSorterOrSearchChange }: 
             </Col>
             <Col span={5}>
                 <Select
-                    value={ queryParams.orderByDesc ? (queryParams.orderByDesc ? "down" : "up") : undefined }
+                    popupClassName="book-sort-select"
+                    value={ queryParams.orderByDesc === undefined ? undefined : (queryParams.orderByDesc ? "down" : "up") }
                     onChange={handleChange}
                 >
                     <Option value="up">{t("filtration.sort-option.price-up")}</Option>

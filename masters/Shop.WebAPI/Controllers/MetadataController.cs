@@ -16,7 +16,7 @@ namespace Shop.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooks()
+        public async Task<IActionResult> GetBookMetadata()
         {
             var result = await _metadataService.GetBookMetadata();
 
