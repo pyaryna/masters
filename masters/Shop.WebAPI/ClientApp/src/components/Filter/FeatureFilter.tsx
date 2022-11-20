@@ -24,7 +24,7 @@ const FeatureFilter: FC<IFeatureFilterProps> = memo(({ name, currentValue, featu
 
     const onChange = useCallback((checkedValues: CheckboxValueType[]) => {
         onFilterChange(name, checkedValues)
-    }, [name]);
+    }, [name, onFilterChange]);
 
     const searchFeature = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.value === "") {

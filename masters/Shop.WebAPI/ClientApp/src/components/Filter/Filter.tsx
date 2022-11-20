@@ -43,7 +43,7 @@ const Filter: FC<IFilterProps> = memo(({ queryParams, onFilterChange, maxPrice, 
           <PriceFilter
             onFilterChange={onFilterChange}
             minPrice={minPrice}
-            maxPrice={minPrice}
+            maxPrice={maxPrice}
             currentValue={[queryParams.priceStart || minPrice, queryParams.priceEnd || maxPrice]}
           />
         </Panel>

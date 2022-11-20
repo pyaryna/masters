@@ -70,3 +70,7 @@
     background: #FFAA66;
     border-radius: 0.5rem;
 }
+
+.price-slider .ant-input-number{
+    width: 100%;
+}

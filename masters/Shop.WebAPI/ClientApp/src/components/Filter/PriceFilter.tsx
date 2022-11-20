@@ -15,12 +15,12 @@ interface IPriceFilterProps {
 const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, maxPrice, currentValue }: IPriceFilterProps) => {
     const onChange = useCallback((newValue: [number, number]) => {
         onFilterChange("price", newValue);
-    }, []);
+    }, [onFilterChange]);
 
     return (
         <div className="price-slider">
             <Row align="middle" justify="space-around">
-                <Col span={8}>
+                <Col span={10}>
                     <InputNumber
                         min={minPrice}
                         max={maxPrice}
@@ -32,7 +32,7 @@ const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, max
                 <Col>
                 -
                 </Col>
-                <Col span={8}>
+                <Col span={10}>
                     <InputNumber
                         min={minPrice}
                         max={maxPrice}
@@ -45,6 +45,8 @@ const PriceFilter: FC<IPriceFilterProps> = memo(({ onFilterChange, minPrice, max
             <Slider
                     range
                     onChange={onChange}
+                    min={minPrice}
+                    max={maxPrice + 1}
                     value={[currentValue[0], currentValue[1]]}
                     trackStyle={[{backgroundColor:"#FFAA66"}]}
                     handleStyle={[{borderColor:"#FFAA66"}, {borderColor:"#FFAA66"}]}

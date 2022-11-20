@@ -10,7 +10,6 @@ import Collaborative from "./pages/Home/Collaborative";
 import BookDetails from "./pages/BookDetails/BookDetails";
 
 import { UserProvider } from "./contexts/UserContext";
-import { FilterProvider } from "./contexts/FilterContext";
 import { MetadataProvider } from "./contexts/MetadataContext";
 
 import "./App.css";

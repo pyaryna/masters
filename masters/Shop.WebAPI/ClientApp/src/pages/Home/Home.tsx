@@ -35,7 +35,7 @@ const Home: FC = memo(() => {
       .catch((e: Error) => {
         console.log(e);
       });
-  }, [setBooks, queryParams]);
+  }, [setBooks]);
 
   useEffect(() => {
     fetchBooks();

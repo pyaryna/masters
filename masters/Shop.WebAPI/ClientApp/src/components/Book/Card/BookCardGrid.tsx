@@ -50,7 +50,7 @@ const BookCardGrid: FC<IBookCardGridProps> = memo(({ books, queryParams, totalBo
           }
         </Row>
       )}
-      <Row justify="center">
+      <Row justify="center" className="book-pagination">
         <Pagination
           pageSizeOptions={[24, 48, 92]}
           total={totalBooksNumber}
