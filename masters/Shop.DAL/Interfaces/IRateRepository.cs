@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using Shop.DAL.Entities;
-using Shop.DAL.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Shop.DAL.Interfaces

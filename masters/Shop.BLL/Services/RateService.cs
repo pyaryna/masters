@@ -5,7 +5,6 @@ using Shop.BLL.DTOs;
 using Shop.BLL.Interfaces;
 using Shop.DAL.Entities;
 using Shop.DAL.Interfaces;
-using Shop.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +38,6 @@ namespace Shop.BLL.Services
         public async Task<ReviewsPageDto> GetReviewsByBookId(ReviewsQueryParamsDto queryParams)
         {
             var id = ParseBookId(queryParams.BookId);
-            var model = _mapper.Map<ReviewsQueryParamsDto, ReviewsQueryParamsModel>(queryParams);
 
             var rate = await _unitOfWork.RateRepository.GetRatesByBookId(id);
             var sortedReviews = rate.Reviews.OrderByDescending(r => r.CreatedAt)
