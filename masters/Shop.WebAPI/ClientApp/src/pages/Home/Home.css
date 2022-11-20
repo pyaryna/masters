@@ -1,7 +1,11 @@
-.home{
+.home {
     margin: 2rem 1rem;
 }
 
-.home .home-books{
+.home .home-books {
     margin-top: 1.5rem;
+}
+
+.home .ant-spin-dot-item {
+    background-color: #FFAA66;
 }

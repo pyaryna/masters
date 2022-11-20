@@ -1,5 +1,5 @@
 import { memo, FC, useState, useCallback, useEffect } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
 
 import Filter from "../../components/Filter/Filter";
@@ -23,6 +23,7 @@ const Home: FC = memo(() => {
   const [books, setBooks] = useState<IBookPreview[]>();
   const [pageInfo, setPageInfo] = useState<IBookPageInfo>();
   const [queryParams, setQueryParams] = useState<IBookQueryParams>(initialQueryParams);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchBooks = useCallback(() => {
     console.log(queryParams);
@@ -30,6 +31,7 @@ const Home: FC = memo(() => {
       .then((response: { data: IBookPreviewPage }) => {
         setBooks(response.data.books);
         setPageInfo(response.data.pageInfo);
+        setLoading(false);
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -70,7 +72,7 @@ const Home: FC = memo(() => {
 
   const onPaginatonChange = useCallback((page: number, pageSize: number) => {
     setQueryParams((prevQueryParams: IBookQueryParams) => {
-      let newQueryParams = { ...prevQueryParams, pageSize: pageSize, pageNumber: page};
+      let newQueryParams = { ...prevQueryParams, pageSize: pageSize, pageNumber: page };
       return newQueryParams;
     });
   }, []);
@@ -91,12 +93,17 @@ const Home: FC = memo(() => {
           />
         </Col>
         <Col span={18}>
-          <BookCardGrid
-            books={books || []}
-            queryParams={queryParams}
-            totalBooksNumber={pageInfo?.totalBookNumber || 0}
-            onPaginatonChange={onPaginatonChange}
-          />
+          {loading ?
+            <Row justify="center">
+              <Spin size="large"/>
+            </Row>
+            : <BookCardGrid
+              books={books || []}
+              queryParams={queryParams}
+              totalBooksNumber={pageInfo?.totalBookNumber || 0}
+              onPaginatonChange={onPaginatonChange}
+            />
+          }
         </Col>
       </Row>
     </div>

@@ -1,61 +1,91 @@
-.book-card-grid-row{
+.book-card-grid-row {
     margin-bottom: 1rem;
 }
 
-.ant-card-cover img{
+.ant-card-cover img {
     width: 100%;
     padding: 0.5rem;
 }
 
-.book-card .ant-card-meta-title{
+.book-card .ant-card-meta-title {
     min-height: 3rem;
     max-height: 3rem;
     white-space: normal;
     line-height: 1.3rem;
 }
 
-.book-card .ant-card-meta-title a{
+.book-card .ant-card-meta-title a {
     color: #000000d9;
 }
 
-.book-card .ant-card-meta-title a:hover{
+.book-card .ant-card-meta-title a:hover {
     text-decoration: underline;
 }
 
-.book-card-hover{
+.book-card-hover {
     position: absolute;
     width: calc(100% - 16px);
     height: 100%;
-    background-color: rgba(0, 0, 0, 0);   
+    background-color: rgba(0, 0, 0, 0);
     top: 0;
     left: 8px;
 }
 
-.book-card:hover .book-card-hover{
+.book-card:hover .book-card-hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.book-card-hover-content
-{
+.book-card-hover-content {
     height: 100%;
     opacity: 0;
 }
 
-.book-card:hover .book-card-hover-content
-{
+.book-card:hover .book-card-hover-content {
     opacity: 1;
 }
 
-.book-card-desc{
+.book-card-desc {
     padding-right: 0.5rem;
 }
 
-.book-card-price{
+.book-card-price {
     color: #FFAA66;
     /* font-size: 1rem; */
 }
 
-.book-card-desc .book-card-desc-btn-col .ant-btn:hover{
+.book-card-desc .book-card-desc-btn-col .ant-btn:hover {
     border-color: #FFAA66;
     color: #FFAA66;
+}
+
+.book-pagination .ant-pagination-item-active,
+.book-pagination .ant-pagination-item:hover,
+.book-pagination .ant-pagination-prev:hover .ant-pagination-item-link,
+.book-pagination .ant-pagination-next:hover .ant-pagination-item-link,
+.book-pagination .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: #FFAA66;
+}
+
+.book-pagination .ant-pagination-item-active a,
+.book-pagination .ant-pagination-item:hover a,
+.book-pagination .ant-pagination-prev:hover .ant-pagination-item-link,
+.book-pagination .ant-pagination-next:hover .ant-pagination-item-link {
+    color: #FFAA66;
+}
+
+.book-pagination .ant-pagination-disabled .ant-pagination-item-link,
+.book-pagination .ant-pagination-disabled:hover .ant-pagination-item-link,
+.book-pagination .ant-pagination-disabled:focus-visible .ant-pagination-item-link {
+    color: rgba(0, 0, 0, 0.25);
+    border-color: #d9d9d9;
+    cursor: not-allowed;
+}
+
+.book-pagination .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    border-color: #FFAA66;
+    box-shadow: 0 0 0 2px rgba(255, 122, 51, 0.5);
+}
+
+.book-pagination .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+    background-color: #fff3e0;
 }

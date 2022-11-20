@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo, useCallback, useState } from "react";
+import { ChangeEvent, FC, KeyboardEventHandler, memo, useCallback, useState } from "react";
 import { Col, Input, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
 
@@ -20,8 +20,9 @@ const Sorter: FC<ISorterProps> = memo(({ queryParams, onSorterOrSearchChange }: 
         onSorterOrSearchChange("sort", value)
     }, [onSorterOrSearchChange]);
 
-    const searchBook = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        onSorterOrSearchChange("searchValue", event.target.value)
+    const searchBook = useCallback((event: any) => {
+        console.log(event);
+        // onSorterOrSearchChange("searchValue", event.target.value)
     }, [onSorterOrSearchChange]);
 
     return (
@@ -41,7 +42,7 @@ const Sorter: FC<ISorterProps> = memo(({ queryParams, onSorterOrSearchChange }: 
             <Col span={6}>
                 <Input
                     placeholder={`${t("search")}...`}
-                    onChange={searchBook}
+                    onPressEnter={searchBook}
                 >
                 </Input>
             </Col>
