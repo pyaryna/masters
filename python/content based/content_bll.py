@@ -39,8 +39,7 @@ def calculate_recomendations_by_book(book_id, number, user_id):
 
     for book in books:
         book['similarityRate'] = round(result_df[result_df["id"] == book['id']]["similarity"].values[0], 4)
-        book['id'] = str(book['id'])
-        del(book['_id'])
+        book = clean_book_properties(book)
 
     books = sorted(books, key=lambda d: d['similarityRate'], reverse=True)
 
@@ -86,8 +85,7 @@ def calculate_recomendations_for_user(user_id, number):
 
     for book in books:
         book['similarityRate'] = recommended_items[recommended_items["id"] == book['id']]["expected_rate"].values[0]
-        book['id'] = str(book['id'])
-        del(book['_id'])
+        book = clean_book_properties(book)
 
     books = sorted(books, key=lambda d: d['similarityRate'], reverse=True)
 
