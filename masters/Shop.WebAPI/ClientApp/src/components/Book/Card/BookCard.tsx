@@ -28,7 +28,7 @@ const BookCard: FC<IBookCardProps> = memo(({ book }: IBookCardProps) => {
           </Link>
         }
       >
-        {book.author}
+        {book.author.name}
         <Meta
           title={
             <Link to={`/${book.id}`}>

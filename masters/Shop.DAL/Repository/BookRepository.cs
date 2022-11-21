@@ -59,12 +59,13 @@ namespace Shop.DAL.Repository
 
             var queryResult = _shopDBContext.Books.Find(query);
 
+            var number = (int)await queryResult.CountDocumentsAsync();
             var max = await queryResult.SortByDescending(b => b.Price).FirstOrDefaultAsync();
             var min = await queryResult.SortBy(b => b.Price).FirstOrDefaultAsync();
 
             return new BooksMetadataModel
             {
-                TotalBookNumber = (int)await queryResult.CountDocumentsAsync(),
+                TotalBookNumber = number,
                 MaxBookPrice = max != null ? max.Price : 0,
                 MinBookPrice = min != null ? min.Price : 0
             };

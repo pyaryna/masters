@@ -35,10 +35,12 @@ def get_books_by_ids(bookIds):
         {
             '$project': {
                 'id': '$_id',
-                'title': '$title',
-                'price': '$price',
-                'imageUrl': '$imageUrl',
-                'author': '$author.name'
+                'title': 1,
+                'price': 1,
+                'imageUrl': 1,
+                'author': 1,
+                'genres': 1,
+                'publisher': 1
                 }
         }
     ])

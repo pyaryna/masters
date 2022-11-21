@@ -1,3 +1,5 @@
+import { IPaginationParams } from "./IPaginationParams"
+
 export interface IBookFilter{
     authorIds?: string[],
     publisherIds?: string[],
@@ -7,9 +9,7 @@ export interface IBookFilter{
     [key: string]: any
 }
 
-export interface IBookQueryParams extends IBookFilter{
+export interface IBookQueryParams extends IBookFilter, IPaginationParams{
     searchValue?: string,
-    orderByDesc?: boolean,
-    pageSize?: number,
-    pageNumber?: number
+    orderByDesc?: boolean
 }

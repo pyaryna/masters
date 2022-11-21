@@ -15,8 +15,7 @@ namespace Shop.BLL.MappingProfiles
                 .ForMember(bd => bd.Id, opt => opt.MapFrom(b => b.Id.ToString()));
 
             CreateMap<Book, BookPreviewDto>()
-                .ForMember(bd => bd.Id, opt => opt.MapFrom(b => b.Id.ToString()))
-                .ForMember(bd => bd.Author, opt => opt.MapFrom(b => b.Author.Name));
+                .ForMember(bd => bd.Id, opt => opt.MapFrom(b => b.Id.ToString()));
 
             CreateMap<Author, AuthorDto>()
                 .ForMember(ad => ad.Id, opt => opt.MapFrom(a => a.Id.ToString()));

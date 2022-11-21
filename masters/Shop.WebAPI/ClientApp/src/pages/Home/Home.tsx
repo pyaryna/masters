@@ -26,6 +26,7 @@ const Home: FC = memo(() => {
 
   const fetchBooks = useCallback(() => {
     console.log(queryParams);
+    setLoading(true);
     getBooksPreview(queryParams)
       .then((response: { data: IBookPreviewPage }) => {
         setBooks(response.data.books);

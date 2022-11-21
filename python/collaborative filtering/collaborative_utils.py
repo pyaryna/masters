@@ -74,3 +74,17 @@ def get_recommended_items(rates, book_similatity):
     rankings.sort( )
     rankings.reverse( )
     return rankings
+
+def clean_book_properties(book):
+    book['id'] = str(book['id'])
+    book['author']['id'] = str(book['author']['_id'])
+    book['publisher']['id'] = str(book['publisher']['_id'])
+    del(book['_id'])
+    del(book['author']['_id'])
+    del(book['publisher']['_id'])
+
+    for genre in book['genres']:
+        genre["id"] = str(genre['_id'])
+        del(genre['_id'])
+
+    return book
