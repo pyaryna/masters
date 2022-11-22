@@ -7,6 +7,17 @@
     padding: 0.5rem;
 }
 
+.book-card .book-card-author{
+    min-height: 1.5rem;
+    max-height: 1.5rem;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.book-card .ant-card-meta-detail{
+    width: 100%;
+}
+
 .book-card .ant-card-meta-title {
     min-height: 3rem;
     max-height: 3rem;

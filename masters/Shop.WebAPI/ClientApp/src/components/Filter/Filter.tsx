@@ -69,7 +69,7 @@ const Filter: FC<IFilterProps> = memo(({ queryParams, onFilterSubmit, maxCurrent
             onFilterChange={onFilterChange}
           />
         </Panel>
-        <Panel header={t("filtration.price")} key="2">
+        <Panel header={`${t("filtration.price")} (USD)`} key="2">
           <PriceFilter
             onFilterChange={onFilterChange}
             minPossiblePrice={metadata?.minBookPrice || 0}
