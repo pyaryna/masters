@@ -1,4 +1,4 @@
-import { memo, FC, useState, useCallback, useEffect, useContext } from "react";
+import { memo, FC, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import Similar from "./Similar";
@@ -27,7 +27,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setCollabBooks]);
+    }, [setCollabBooks, bookId]);
 
     const fetchContentBooks = useCallback(() => {
         getContentRecomByBook(bookId, 5)
@@ -39,7 +39,7 @@ const SimilarBlock: FC<ISimilarBlockProps> = memo(({ bookId }: ISimilarBlockProp
             .catch((e: Error) => {
                 console.log(e);
             });
-    }, [setContentBooks]);
+    }, [setContentBooks, bookId]);
 
     useEffect(() => {
         fetchCollabBooks();

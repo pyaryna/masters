@@ -31,7 +31,6 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                     bookId: bookId,
                     createdAt: new Date()
                 };
-                console.log(itemToSend);
                 addReview(itemToSend)
                     .then(() => {
                         onAddReview();
@@ -47,9 +46,7 @@ const ReviewForm: FC<IReviewFormProps> = memo(({ bookId, onAddReview }: IReviewF
                     });
             }
         });
-    }, [form, user, bookId]);
-
-    console.log(user);
+    }, [form, user, bookId, onAddReview]);
 
     return (
         <Collapse

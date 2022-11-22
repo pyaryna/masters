@@ -15,17 +15,20 @@ interface IRecommendationPageProps {
 }
 
 const RecommendationPage: FC<IRecommendationPageProps> = memo(({ getRecommendations }) => {
-    const [books, setBooks] = useState<IBookPreview[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [books, setBooks] = useState<IBookPreview[]>();
+    const [filteredBooks, setFilteredBooks] = useState<IBookPreview[]>();
     const [queryParams, setQueryParams] = useState<IBookQueryParams>({});
     const [user] = useContext(UserContext);
-    const [loading, setLoading] = useState<boolean>(true);
 
     const fetchBooks = useCallback(() => {
+        setLoading(true);
         if (user) {
             getRecommendations(user?.id, 24)
                 .then((response: { data: IBookPreview[] }) => {
                     let temp = response.data.sort((a, b) => (b.similarityRate || 0) - (a.similarityRate || 0));
                     setBooks(temp);
+                    setFilteredBooks(temp);
                     setLoading(false);
                     console.log(response.data);
                 })
@@ -33,11 +36,47 @@ const RecommendationPage: FC<IRecommendationPageProps> = memo(({ getRecommendati
                     console.log(e);
                 });
         }
-    }, [user, setBooks]);
+    }, [user, setBooks, setLoading, getRecommendations, setFilteredBooks]);
 
     useEffect(() => {
         fetchBooks();
     }, [fetchBooks]);
+
+    useEffect(() => {
+        if (books) {
+            setLoading(true);
+            let tempBooks = [...books];
+            if (queryParams.authorIds !== undefined && queryParams.authorIds.length > 0) {
+                tempBooks = tempBooks.filter(b => queryParams.authorIds?.includes(b.author.id));
+            }
+            if (queryParams.genreIds !== undefined && queryParams.genreIds.length > 0) {
+                tempBooks = tempBooks.filter(b => b.genres.some(g => queryParams.genreIds?.includes(g.id)));
+            }
+            if (queryParams.publisherIds !== undefined && queryParams.publisherIds.length > 0) {
+                tempBooks = tempBooks.filter(b => queryParams.publisherIds?.includes(b.publisher.id));
+            }
+            tempBooks = queryParams.priceStart
+                ? tempBooks.filter(b => b.price >= (queryParams.priceStart || b.price)) : tempBooks;
+
+            tempBooks = queryParams.priceEnd
+                ? tempBooks.filter(b => b.price <= (queryParams.priceEnd || b.price)) : tempBooks;
+
+            if (queryParams.searchValue !== undefined) {
+                tempBooks = queryParams.searchValue === "" ? tempBooks
+                    : tempBooks.filter(d => d.title.toLowerCase().includes(queryParams.searchValue || ""));
+            }
+            if (queryParams.orderByDesc !== undefined) {
+                if (queryParams.orderByDesc) {
+                    tempBooks.sort((a, b) => b.price - a.price);
+                }
+                else {
+                    tempBooks.sort((a, b) => a.price - b.price);
+                }
+            }
+            setFilteredBooks(tempBooks);
+            setLoading(false);
+        }
+    }, [queryParams, setLoading, setFilteredBooks, books]);
 
     const onFilterSubmit = useCallback((filterValues: IBookFilter) => {
         setQueryParams((prevQueryParams: IBookQueryParams) => {
@@ -64,7 +103,7 @@ const RecommendationPage: FC<IRecommendationPageProps> = memo(({ getRecommendati
             }
             return newQueryParams;
         });
-    }, []);
+    }, [setQueryParams]);
 
     return (
         <div className="home">
@@ -77,8 +116,8 @@ const RecommendationPage: FC<IRecommendationPageProps> = memo(({ getRecommendati
                     <Filter
                         queryParams={queryParams}
                         onFilterSubmit={onFilterSubmit}
-                        minCurrentPrice={Math.min(...books?.map(b => b.price)) || 0}
-                        maxCurrentPrice={Math.max(...books?.map(b => b.price)) || 0}
+                        minCurrentPrice={filteredBooks ? Math.min(...filteredBooks.map(b => b.price)) : 0}
+                        maxCurrentPrice={filteredBooks ? Math.max(...filteredBooks.map(b => b.price)) : 0}
                     />
                 </Col>
                 <Col span={18}>
@@ -88,7 +127,7 @@ const RecommendationPage: FC<IRecommendationPageProps> = memo(({ getRecommendati
                         </Row>
                         :
                         <BookCardGrid
-                            books={books || []}
+                            books={filteredBooks || []}
                             queryParams={queryParams}
                         />
                     }
